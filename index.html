@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hamas Ahmed — Creative Video Editor based in Thatta, Sindh, Pakistan. Cinematic editing, color grading, motion graphics, and premium post-production services.">
+    <meta name="keywords" content="Hamas Ahmed, Video Editor, Creative Editor, Color Grading, Motion Graphics, Pakistan, Thatta, Sindh, Cinematic Editing">
+    <meta name="author" content="Hamas Ahmed">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Hamas Ahmed — Creative Video Editor">
+    <meta property="og:description" content="Cinematic editing, color grading, and premium post-production. Available worldwide.">
+    <meta property="og:image" content="assets/hero.png">
+    <meta property="og:url" content="">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hamas Ahmed — Creative Video Editor">
+    <meta name="twitter:description" content="Cinematic editing, color grading, and premium post-production.">
+    <meta name="twitter:image" content="assets/hero.png">
+    
+    <title>Hamas Ahmed — Creative Video Editor</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='sans-serif' font-weight='bold' fill='%23d4af37'>H</text></svg>">
+    
+    <!-- Google Fonts: Syne (Headings) + Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============================================
+         PRELOADER
+    ============================================ -->
+    <div class="loader" id="loader">
+        <div class="loader__inner">
+            <div class="loader__logo">
+                <span class="loader__letter" data-letter="H">H</span>
+                <span class="loader__letter" data-letter="A">A</span>
+            </div>
+            <div class="loader__bar">
+                <div class="loader__bar-fill" id="loaderBar"></div>
+            </div>
+            <div class="loader__percent">
+                <span id="loaderPercent">0</span><span class="loader__percent-sign">%</span>
+            </div>
+            <div class="loader__text">Loading Experience</div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         CUSTOM CURSOR
+    ============================================ -->
+    <div class="cursor" id="cursor">
+        <div class="cursor__dot"></div>
+    </div>
+    <div class="cursor__glow" id="cursorGlow"></div>
+
+    <!-- ============================================
+         SCROLL PROGRESS
+    ============================================ -->
+    <div class="scroll-progress" id="scrollProgress">
+        <div class="scroll-progress__bar" id="scrollProgressBar"></div>
+    </div>
+
+    <!-- ============================================
+         NAVIGATION
+    ============================================ -->
+    <nav class="nav" id="nav">
+        <a href="#hero" class="nav__logo" data-cursor="link">
+            <span class="nav__logo-mark">HA</span>
+        </a>
+        <ul class="nav__links">
+            <li><a href="#reel" data-cursor="link">Reel</a></li>
+            <li><a href="#journey" data-cursor="link">Journey</a></li>
+            <li><a href="#services" data-cursor="link">Services</a></li>
+            <li><a href="#portfolio" data-cursor="link">Work</a></li>
+            <li><a href="#contact" data-cursor="link">Contact</a></li>
+        </ul>
+        <a href="#contact" class="nav__cta" data-cursor="link">
+            <span>Let's Talk</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+        <button class="nav__burger" id="navBurger" aria-label="Menu toggle">
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#reel" class="mobile-menu__link">Reel</a></li>
+            <li><a href="#journey" class="mobile-menu__link">Journey</a></li>
+            <li><a href="#services" class="mobile-menu__link">Services</a></li>
+            <li><a href="#portfolio" class="mobile-menu__link">Work</a></li>
+            <li><a href="#skills" class="mobile-menu__link">Skills</a></li>
+            <li><a href="#contact" class="mobile-menu__link">Contact</a></li>
+        </ul>
+    </div>
+
+    <main>
+
+    <!-- ============================================
+         1. HERO SECTION
+    ============================================ -->
+    <section class="hero" id="hero">
+        <div class="hero__bg">
+            <div class="hero__gradient" id="heroGradient"></div>
+            <div class="hero__grid"></div>
+            <div class="hero__noise"></div>
+        </div>
+        <div class="hero__content">
+            <div class="hero__tag">
+                <span class="hero__tag-dot"></span>
+                <span class="hero__tag-text">Available for Projects</span>
+            </div>
+            <h1 class="hero__title">
+                <span class="hero__name-line">
+                    <span class="hero__name" data-text="Hamas">Hamas</span>
+                </span>
+                <span class="hero__name-line">
+                    <span class="hero__name hero__name--gold" data-text="Ahmed">Ahmed</span>
+                </span>
+            </h1>
+            <p class="hero__subtitle">
+                <span class="hero__subtitle-text">Creative Video Editor</span>
+            </p>
+            <p class="hero__desc">
+                Crafting cinematic stories frame by frame. Transforming raw footage into 
+                emotional journeys that captivate, inspire, and leave a lasting impression.
+            </p>
+            <div class="hero__actions">
+                <a href="#reel" class="btn btn--primary" data-cursor="link">
+                    <span>View Reel</span>
+                    <i class="fas fa-play"></i>
+                </a>
+                <a href="#contact" class="btn btn--ghost" data-cursor="link">
+                    <span>Get in Touch</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="hero__stats">
+                <div class="hero__stat">
+                    <span class="hero__stat-number" data-count="50">0</span>
+                    <span class="hero__stat-plus">+</span>
+                    <span class="hero__stat-label">Projects</span>
+                </div>
+                <div class="hero__stat">
+                    <span class="hero__stat-number" data-count="3">0</span>
+                    <span class="hero__stat-plus">+</span>
+                    <span class="hero__stat-label">Years</span>
+                </div>
+                <div class="hero__stat">
+                    <span class="hero__stat-number" data-count="100">0</span>
+                    <span class="hero__stat-plus">%</span>
+                    <span class="hero__stat-label">Dedication</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero__visual">
+            <div class="hero__image-wrap">
+                <img src="assets/hero.png" alt="Hamas Ahmed — Creative Video Editor" class="hero__image" loading="eager">
+                <div class="hero__image-glow"></div>
+            </div>
+            <div class="hero__floating hero__floating--1">
+                <i class="fas fa-film"></i>
+            </div>
+            <div class="hero__floating hero__floating--2">
+                <i class="fas fa-video"></i>
+            </div>
+            <div class="hero__floating hero__floating--3">
+                <i class="fas fa-scissors"></i>
+            </div>
+        </div>
+        <div class="hero__scroll">
+            <span>Scroll</span>
+            <div class="hero__scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         2. FEATURED REEL
+    ============================================ -->
+    <section class="reel" id="reel">
+        <div class="reel__bg-glow"></div>
+        <div class="container">
+            <div class="section-label">
+                <span class="section-label__line"></span>
+                <span>Featured Reel</span>
+            </div>
+            <h2 class="reel__title section-title">
+                <span>The Cinematic Reel</span>
+            </h2>
+            <p class="reel__desc section-desc">
+                A showcase of my finest editing work — where storytelling meets visual artistry.
+            </p>
+            <div class="reel__player" id="reelPlayer" data-cursor="play">
+                <div class="reel__thumbnail">
+                    <img src="assets/editing-bg.jpg" alt="Featured reel preview" loading="lazy">
+                    <div class="reel__overlay"></div>
+                    <div class="reel__play">
+                        <div class="reel__play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="reel__play-ring"></div>
+                        <div class="reel__play-ring reel__play-ring--2"></div>
+                    </div>
+                    <div class="reel__meta">
+                        <span class="reel__tag">4K</span>
+                        <span class="reel__duration"><i class="far fa-clock"></i> 2:34</span>
+                    </div>
+                </div>
+                <div class="reel__info">
+                    <div class="reel__info-left">
+                        <span>Showreel 2026</span>
+                        <span class="reel__views"><i class="fas fa-eye"></i> 12.5K Views</span>
+                    </div>
+                    <div class="reel__info-right">
+                        <span>Cinematic · Commercial · Music Video</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         3. JOURNEY / TIMELINE
+    ============================================ -->
+    <section class="journey" id="journey">
+        <div class="container">
+            <div class="section-label">
+                <span class="section-label__line"></span>
+                <span>The Journey</span>
+            </div>
+            <h2 class="journey__title section-title">
+                <span>From First Cut to</span>
+                <span class="text-gold">Cinematic Vision</span>
+            </h2>
+            <div class="journey__timeline">
+                <div class="journey__line">
+                    <div class="journey__line-progress" id="journeyProgress"></div>
+                </div>
+                <div class="journey__cards">
+                    <!-- Card 1 -->
+                    <div class="journey__card" data-year="2023">
+                        <div class="journey__card-dot"></div>
+                        <div class="journey__card-year">2023</div>
+                        <div class="journey__card-content">
+                            <h3 class="journey__card-title">The Beginning</h3>
+                            <p class="journey__card-text">
+                                Started the journey into video editing with a passion for storytelling. 
+                                Learned the fundamentals of cutting, pacing, and rhythm that form the 
+                                backbone of every great edit.
+                            </p>
+                            <div class="journey__card-tag">
+                                <i class="fas fa-flag-checkered"></i> Starting Point
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="journey__card journey__card--right" data-year="2024">
+                        <div class="journey__card-dot"></div>
+                        <div class="journey__card-year">2024</div>
+                        <div class="journey__card-content">
+                            <h3 class="journey__card-title">Mastering the Craft</h3>
+                            <p class="journey__card-text">
+                                Dove deep into color grading, sound design, and motion graphics. 
+                                Began working with commercial clients and delivering projects that 
+                                pushed creative boundaries.
+                            </p>
+                            <div class="journey__card-tag">
+                                <i class="fas fa-bolt"></i> Growth Phase
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="journey__card" data-year="2025">
+                        <div class="journey__card-dot"></div>
+                        <div class="journey__card-year">2025</div>
+                        <div class="journey__card-content">
+                            <h3 class="journey__card-title">Expanding Horizons</h3>
+                            <p class="journey__card-text">
+                                Expanded into music videos, documentaries, and brand films. 
+                                Developed a signature cinematic style — moody, gold-tinted, 
+                                emotionally driven storytelling.
+                            </p>
+                            <div class="journey__card-tag">
+                                <i class="fas fa-rocket"></i> Expansion
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="journey__card journey__card--right" data-year="2026">
+                        <div class="journey__card-dot journey__card-dot--active"></div>
+                        <div class="journey__card-year">2026</div>
+                        <div class="journey__card-content">
+                            <h3 class="journey__card-title">Cinematic Present</h3>
+                            <p class="journey__card-text">
+                                Now crafting premium visual experiences for clients worldwide. 
+                                Every project is an opportunity to tell a story that resonates 
+                                long after the final frame fades to black.
+                            </p>
+                            <div class="journey__card-tag journey__card-tag--active">
+                                <i class="fas fa-star"></i> Current
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         4. SERVICES
+    ============================================ -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-label">
+                <span class="section-label__line"></span>
+                <span>What I Do</span>
+            </div>
+            <h2 class="services__title section-title">
+                <span>Premium Editing</span>
+                <span class="text-gold">Services</span>
+            </h2>
+            <p class="services__desc section-desc">
+                Every frame matters. Every cut tells a story. Here's what I bring to your project.
+            </p>
+            <div class="services__grid">
+                <!-- Service 1 -->
+                <div class="service-card glass" data-cursor="hover">
+                    <div class="service-card__icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3 class="service-card__title">Video Editing</h3>
+                    <p class="service-card__desc">
+                        Cinematic editing with precision pacing, rhythm, and emotional storytelling. 
+                        From raw footage to polished final cut.
+                    </p>
+                    <div class="service-card__shine"></div>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card glass" data-cursor="hover">
+                    <div class="service-card__icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="service-card__title">Color Grading</h3>
+                    <p class="service-card__desc">
+                        Professional color grading that sets the mood. Rich blacks, golden highlights, 
+                        and tones that evoke emotion in every scene.
+                    </p>
+                    <div class="service-card__shine"></div>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card glass" data-cursor="hover">
+                    <div class="service-card__icon">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="service-card__title">Motion Graphics</h3>
+                    <p class="service-card__desc">
+                        Custom motion graphics, animated titles, and visual effects that elevate 
+                        your content from ordinary to extraordinary.
+                    </p>
+                    <div class="service-card__shine"></div>
+                </div>
+                <!-- Service 4 -->
+                <div class="service-card glass" data-cursor="hover">
+                    <div class="service-card__icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="service-card__title">Sound Design</h3>
+                    <p class="service-card__desc">
+                        Immersive audio design — sound effects, music selection, and audio mixing 
+                        that completes the cinematic experience.
+                    </p>
+                    <div class="service-card__shine"></div>
+                </div>
+                <!-- Service 5 -->
+                <div class="service-card glass" data-cursor="hover">
+                    <div class="service-card__icon">
+                        <i class="fas fa-clapperboard"></i>
+                    </div>
+                    <h3 class="service-card__title">Commercial Edits</h3>
+                    <p class="service-card__desc">
+                        Brand films, product launches, and ad campaigns with a premium, 
+                        high-end feel that captures attention.
+                    </p>
+                    <div class="service-card__shine"></div>
+                </div>
+                <!-- Service 6 -->
+                <div class="service-card glass" data-cursor="hover">
+                    <div class="service-card__icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <h3 class="service-card__title">Podcast & Social</h3>
+                    <p class="service-card__desc">
+                        Engaging social media content, podcast editing, and short-form videos 
+                        optimized for maximum impact and reach.
+                    </p>
+                    <div class="service-card__shine"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         5. PORTFOLIO
+    ============================================ -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-label">
+                <span class="section-label__line"></span>
+                <span>Selected Work</span>
+            </div>
+            <h2 class="portfolio__title section-title">
+                <span>Featured</span>
+                <span class="text-gold">Projects</span>
+            </h2>
+            <div class="portfolio__filters">
+                <button class="portfolio__filter is-active" data-filter="all" data-cursor="link">All</button>
+                <button class="portfolio__filter" data-filter="commercial" data-cursor="link">Commercial</button>
+                <button class="portfolio__filter" data-filter="music" data-cursor="link">Music Video</button>
+                <button class="portfolio__filter" data-filter="documentary" data-cursor="link">Documentary</button>
+            </div>
+            <div class="portfolio__grid">
+                <!-- Project 1 -->
+                <div class="project-card" data-category="commercial" data-cursor="hover">
+                    <div class="project-card__image">
+                        <img src="assets/project1.jpg" alt="Luxury Commercial Project" loading="lazy">
+                        <div class="project-card__overlay">
+                            <div class="project-card__content">
+                                <span class="project-card__category">Commercial</span>
+                                <h3 class="project-card__title">Luxury Brand Film</h3>
+                                <p class="project-card__desc">A premium product commercial with cinematic color grading.</p>
+                                <a href="#contact" class="project-card__link" data-cursor="link">
+                                    <span>View Project</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card" data-category="music" data-cursor="hover">
+                    <div class="project-card__image">
+                        <img src="assets/project2.jpg" alt="Music Video Project" loading="lazy">
+                        <div class="project-card__overlay">
+                            <div class="project-card__content">
+                                <span class="project-card__category">Music Video</span>
+                                <h3 class="project-card__title">Rhythm & Motion</h3>
+                                <p class="project-card__desc">A dynamic music video with rhythm-driven cuts and visual effects.</p>
+                                <a href="#contact" class="project-card__link" data-cursor="link">
+                                    <span>View Project</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="project-card" data-category="documentary" data-cursor="hover">
+                    <div class="project-card__image">
+                        <img src="assets/project3.jpg" alt="Documentary Project" loading="lazy">
+                        <div class="project-card__overlay">
+                            <div class="project-card__content">
+                                <span class="project-card__category">Documentary</span>
+                                <h3 class="project-card__title">Golden Hour Stories</h3>
+                                <p class="project-card__desc">A documentary short capturing the beauty of natural light.</p>
+                                <a href="#contact" class="project-card__link" data-cursor="link">
+                                    <span>View Project</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="project-card" data-category="commercial" data-cursor="hover">
+                    <div class="project-card__image">
+                        <img src="assets/editing-bg.jpg" alt="Behind the Scenes" loading="lazy">
+                        <div class="project-card__overlay">
+                            <div class="project-card__content">
+                                <span class="project-card__category">Commercial</span>
+                                <h3 class="project-card__title">Studio Session</h3>
+                                <p class="project-card__desc">Behind-the-scenes commercial edit with premium studio aesthetics.</p>
+                                <a href="#contact" class="project-card__link" data-cursor="link">
+                                    <span>View Project</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio__cta">
+                <a href="#contact" class="btn btn--primary" data-cursor="link">
+                    <span>Start Your Project</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         6. SKILLS
+    ============================================ -->
+    <section class="skills" id="skills">
+        <div class="skills__bg"></div>
+        <div class="container">
+            <div class="section-label">
+                <span class="section-label__line"></span>
+                <span>Expertise</span>
+            </div>
+            <h2 class="skills__title section-title">
+                <span>Tools of the</span>
+                <span class="text-gold">Trade</span>
+            </h2>
+            <p class="skills__desc section-desc">
+                Mastery over the industry's finest tools — every project crafted with precision.
+            </p>
+            <div class="skills__grid">
+                <div class="skill-bar" data-skill="95">
+                    <div class="skill-bar__header">
+                        <span class="skill-bar__name"><i class="fas fa-video"></i> Premiere Pro</span>
+                        <span class="skill-bar__value">95%</span>
+                    </div>
+                    <div class="skill-bar__track">
+                        <div class="skill-bar__fill" data-fill="95"></div>
+                    </div>
+                </div>
+                <div class="skill-bar" data-skill="90">
+                    <div class="skill-bar__header">
+                        <span class="skill-bar__name"><i class="fas fa-wand-magic-sparkles"></i> After Effects</span>
+                        <span class="skill-bar__value">90%</span>
+                    </div>
+                    <div class="skill-bar__track">
+                        <div class="skill-bar__fill" data-fill="90"></div>
+                    </div>
+                </div>
+                <div class="skill-bar" data-skill="88">
+                    <div class="skill-bar__header">
+                        <span class="skill-bar__name"><i class="fas fa-palette"></i> DaVinci Resolve</span>
+                        <span class="skill-bar__value">88%</span>
+                    </div>
+                    <div class="skill-bar__track">
+                        <div class="skill-bar__fill" data-fill="88"></div>
+                    </div>
+                </div>
+                <div class="skill-bar" data-skill="85">
+                    <div class="skill-bar__header">
+                        <span class="skill-bar__name"><i class="fas fa-music"></i> Audition</span>
+                        <span class="skill-bar__value">85%</span>
+                    </div>
+                    <div class="skill-bar__track">
+                        <div class="skill-bar__fill" data-fill="85"></div>
+                    </div>
+                </div>
+                <div class="skill-bar" data-skill="92">
+                    <div class="skill-bar__header">
+                        <span class="skill-bar__name"><i class="fas fa-film"></i> Cinematography</span>
+                        <span class="skill-bar__value">92%</span>
+                    </div>
+                    <div class="skill-bar__track">
+                        <div class="skill-bar__fill" data-fill="92"></div>
+                    </div>
+                </div>
+                <div class="skill-bar" data-skill="87">
+                    <div class="skill-bar__header">
+                        <span class="skill-bar__name"><i class="fas fa-lightbulb"></i> Creative Direction</span>
+                        <span class="skill-bar__value">87%</span>
+                    </div>
+                    <div class="skill-bar__track">
+                        <div class="skill-bar__fill" data-fill="87"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         7. TESTIMONIALS
+    ============================================ -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-label">
+                <span class="section-label__line"></span>
+                <span>Client Words</span>
+            </div>
+            <h2 class="testimonials__title section-title">
+                <span>What Clients</span>
+                <span class="text-gold">Say</span>
+            </h2>
+            <div class="testimonials__slider" id="testimonialsSlider">
+                <div class="testimonials__track" id="testimonialsTrack">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card glass">
+                        <div class="testimonial-card__quote">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-card__text">
+                            Hamas transformed our brand film into something truly cinematic. 
+                            The pacing, the color, the emotion — everything was perfect. 
+                            Easily one of the best editors I've worked with.
+                        </p>
+                        <div class="testimonial-card__author">
+                            <div class="testimonial-card__avatar">SK</div>
+                            <div class="testimonial-card__info">
+                                <span class="testimonial-card__name">Sarah Khan</span>
+                                <span class="testimonial-card__role">Brand Director, Luxe Studio</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-card__stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card glass">
+                        <div class="testimonial-card__quote">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-card__text">
+                            Working with Hamas was effortless. He understood the vision immediately 
+                            and delivered a music video that exceeded every expectation. 
+                            The rhythm of his cuts is unmatched.
+                        </p>
+                        <div class="testimonial-card__author">
+                            <div class="testimonial-card__avatar">AR</div>
+                            <div class="testimonial-card__info">
+                                <span class="testimonial-card__name">Ali Raza</span>
+                                <span class="testimonial-card__role">Music Artist</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-card__stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card glass">
+                        <div class="testimonial-card__quote">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial-card__text">
+                            The documentary Hamas edited for us was nothing short of breathtaking. 
+                            He has a rare ability to find the emotional core of any footage and 
+                            build the entire story around it.
+                        </p>
+                        <div class="testimonial-card__author">
+                            <div class="testimonial-card__avatar">FM</div>
+                            <div class="testimonial-card__info">
+                                <span class="testimonial-card__name">Fatima Malik</span>
+                                <span class="testimonial-card__role">Producer, Horizon Films</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-card__stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials__controls">
+                    <button class="testimonials__btn testimonials__btn--prev" id="testPrev" data-cursor="link" aria-label="Previous">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="testimonials__dots" id="testDots"></div>
+                    <button class="testimonials__btn testimonials__btn--next" id="testNext" data-cursor="link" aria-label="Next">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         8. WHY CHOOSE ME
+    ============================================ -->
+    <section class="why" id="why">
+        <div class="container">
+            <div class="section-label">
+                <span class="section-label__line"></span>
+                <span>Why Me</span>
+            </div>
+            <h2 class="why__title section-title">
+                <span>The Difference is</span>
+                <span class="text-gold">in the Details</span>
+            </h2>
+            <div class="why__grid">
+                <div class="why__stats">
+                    <div class="why__stat glass">
+                        <span class="why__stat-number" data-count="50">0</span>
+                        <span class="why__stat-plus">+</span>
+                        <span class="why__stat-label">Projects Delivered</span>
+                    </div>
+                    <div class="why__stat glass">
+                        <span class="why__stat-number" data-count="100">0</span>
+                        <span class="why__stat-plus">%</span>
+                        <span class="why__stat-label">Client Satisfaction</span>
+                    </div>
+                    <div class="why__stat glass">
+                        <span class="why__stat-number" data-count="24">0</span>
+                        <span class="why__stat-plus">h</span>
+                        <span class="why__stat-label">Avg. Response Time</span>
+                    </div>
+                    <div class="why__stat glass">
+                        <span class="why__stat-number" data-count="3">0</span>
+                        <span class="why__stat-plus">+</span>
+                        <span class="why__stat-label">Years Experience</span>
+                    </div>
+                </div>
+                <div class="why__reasons">
+                    <div class="why__reason">
+                        <div class="why__reason-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="why__reason-text">
+                            <h3>Fast Turnaround</h3>
+                            <p>Quality work delivered on time, every time. No missed deadlines, no compromises.</p>
+                        </div>
+                    </div>
+                    <div class="why__reason">
+                        <div class="why__reason-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <div class="why__reason-text">
+                            <h3>Premium Quality</h3>
+                            <p>Every frame treated with cinematic care. Broadcast-grade output on every project.</p>
+                        </div>
+                    </div>
+                    <div class="why__reason">
+                        <div class="why__reason-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="why__reason-text">
+                            <h3>Clear Communication</h3>
+                            <p>Transparent process from brief to final delivery. You're always in the loop.</p>
+                        </div>
+                    </div>
+                    <div class="why__reason">
+                        <div class="why__reason-icon">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <div class="why__reason-text">
+                            <h3>Unlimited Revisions</h3>
+                            <p>We iterate until it's perfect. Your vision, refined to its absolute best.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         9. CONTACT
+    ============================================ -->
+    <section class="contact" id="contact">
+        <div class="contact__bg-glow"></div>
+        <div class="container">
+            <div class="section-label">
+                <span class="section-label__line"></span>
+                <span>Let's Connect</span>
+            </div>
+            <h2 class="contact__title section-title">
+                <span>Let's Create</span>
+                <span class="text-gold">Something Iconic</span>
+            </h2>
+            <p class="contact__desc section-desc">
+                Have a project in mind? Let's talk. Whether it's a commercial, music video, 
+                or documentary — I bring cinematic vision to every edit.
+            </p>
+            <div class="contact__cards">
+                <a href="https://wa.me/923063633310" target="_blank" rel="noopener" class="contact-card glass" data-cursor="link">
+                    <div class="contact-card__icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="contact-card__info">
+                        <span class="contact-card__label">WhatsApp</span>
+                        <span class="contact-card__value">+92 306 3633310</span>
+                    </div>
+                    <i class="fas fa-arrow-right contact-card__arrow"></i>
+                </a>
+                <a href="mailto:hamasahmed155@gmail.com" class="contact-card glass" data-cursor="link">
+                    <div class="contact-card__icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-card__info">
+                        <span class="contact-card__label">Email</span>
+                        <span class="contact-card__value">hamasahmed155@gmail.com</span>
+                    </div>
+                    <i class="fas fa-arrow-right contact-card__arrow"></i>
+                </a>
+                <div class="contact-card glass" data-cursor="hover">
+                    <div class="contact-card__icon">
+                        <i class="fas fa-location-dot"></i>
+                    </div>
+                    <div class="contact-card__info">
+                        <span class="contact-card__label">Location</span>
+                        <span class="contact-card__value">Thatta, Sindh, Pakistan</span>
+                    </div>
+                </div>
+            </div>
+            <a href="https://wa.me/923063633310" target="_blank" rel="noopener" class="contact__big-cta" data-cursor="link">
+                <span class="contact__big-cta-text">Start a Conversation</span>
+                <span class="contact__big-cta-icon"><i class="fas fa-arrow-right"></i></span>
+            </a>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- ============================================
+         10. FOOTER
+    ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <a href="#hero" class="footer__logo" data-cursor="link">Hamas Ahmed</a>
+                    <p class="footer__tagline">Creative Video Editor · Cinematic Storyteller</p>
+                </div>
+                <div class="footer__social">
+                    <a href="https://wa.me/923063633310" target="_blank" rel="noopener" class="footer__social-link" data-cursor="link" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:hamasahmed155@gmail.com" class="footer__social-link" data-cursor="link" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="#" class="footer__social-link" data-cursor="link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="footer__social-link" data-cursor="link" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <span class="footer__copy">© 2026 Hamas Ahmed. All rights reserved.</span>
+                <span class="footer__credit">Crafted with <i class="fas fa-heart"></i> and precision</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         LIBRARIES (CDN)
+    ============================================ -->
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <!-- SplitType -->
+    <script src="https://unpkg.com/split-type@1.0.3/umd/index.min.js"></script>
+
+    <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+</html>
