@@ -13,6 +13,6 @@ https://hamas3492.github.io/portfolio
 - Font Awesome (icons)
 
 ## Contact
-- WhatsApp: +92 306 3633310
+- WhatsApp: 03063632210
 - Email: hamasahmed155@gmail.com
 - Location: Thatta, Sindh, Pakistan
