@@ -1961,3 +1961,54 @@ button, a { -webkit-tap-highlight-color: transparent; }
     .project-player__media { aspect-ratio: 9 / 16; max-height: 62vh; }
     .project-player__caption h2 { font-size: 1.15rem; }
 }
+
+/* Android project-card layout: keep the complete card content inside the touch target. */
+@media (max-width: 768px) {
+    .project-card {
+        height: 320px;
+        min-height: 320px;
+        aspect-ratio: auto;
+    }
+
+    .project-card__image {
+        height: 100%;
+    }
+
+    .project-card__content {
+        padding: 14px 16px 16px;
+    }
+
+    .project-card__category {
+        margin-bottom: 8px;
+        padding: 3px 10px;
+        font-size: .58rem;
+        letter-spacing: .1em;
+    }
+
+    .project-card__title {
+        margin-bottom: 8px;
+        font-size: clamp(1.05rem, 5vw, 1.4rem);
+        line-height: 1.15;
+    }
+
+    .project-card__desc {
+        margin-bottom: 12px;
+        font-size: .75rem;
+        line-height: 1.35;
+        -webkit-line-clamp: 2;
+    }
+
+    .project-card__play {
+        min-height: 40px;
+        white-space: nowrap;
+        appearance: none;
+        -webkit-appearance: none;
+    }
+}
+
+@media (max-width: 390px) {
+    .project-card {
+        height: 300px;
+        min-height: 300px;
+    }
+}
