@@ -1898,7 +1898,7 @@ ul {
 
 /* Production safeguards: preserve the visual design while preventing layout leaks. */
 *, *::before, *::after { box-sizing: border-box; }
-html, body { max-width: 100%; overflow-x: clip; }
+html, body { max-width: 100%; overflow-x: hidden; }
 section, main, header, footer, nav { min-width: 0; }
 img, video, iframe { max-width: 100%; }
 button, a { -webkit-tap-highlight-color: transparent; }
@@ -1937,3 +1937,27 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .project-player__caption h2 { margin: 10px 0 4px; font-family: var(--font-head); font-size: clamp(1.2rem, 3vw, 1.8rem); }
 .project-player__caption p { margin: 0; color: var(--text-muted); }
 @media (max-width: 600px) { .project-player__dialog { border-radius: 16px; } .project-player__caption { padding: 18px; } }
+
+
+/* Touch devices do not have hover: keep project controls visible and tappable. */
+@media (hover: none), (max-width: 768px) {
+    .project-card__overlay { opacity: 1; background: linear-gradient(180deg, rgba(10,10,10,.12) 18%, rgba(10,10,10,.88) 100%); }
+    .project-card__content { transform: translateY(0); padding: 16px; width: 100%; }
+    .project-card__title { font-size: clamp(1.05rem, 5.4vw, 1.45rem); line-height: 1.18; }
+    .project-card__desc { font-size: .78rem; line-height: 1.45; margin-bottom: 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .project-card__link { padding: 9px 16px; font-size: .76rem; }
+    .project-card { min-height: 250px; }
+}
+
+@media (max-width: 390px) {
+    .container { width: min(100% - 28px, 1180px); }
+    .hero__title { font-size: clamp(2.8rem, 15vw, 4.4rem); }
+    .hero__stats { gap: 14px; }
+    .hero__stat-label { font-size: .62rem; letter-spacing: .08em; }
+    .portfolio__filters { gap: 8px; flex-wrap: wrap; }
+    .portfolio__filter { padding: 8px 12px; font-size: .68rem; }
+    .project-player { padding: 12px; }
+    .project-player__dialog { max-height: 88vh; }
+    .project-player__media { aspect-ratio: 9 / 16; max-height: 62vh; }
+    .project-player__caption h2 { font-size: 1.15rem; }
+}
