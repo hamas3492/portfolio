@@ -679,7 +679,7 @@ function initProjectPlayer() {
             image.src = button.dataset.projectPoster;
             image.alt = `${title.textContent} preview`;
             media.appendChild(image);
-            message.textContent = 'Visual preview shown here. The full video will be added when its project file is uploaded.';
+            message.textContent = 'Project preview by Hamas Ahmed.';
         }
         player.classList.add('is-open');
         player.setAttribute('aria-hidden', 'false');
