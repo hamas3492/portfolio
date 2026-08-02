@@ -641,6 +641,55 @@ function initReelPlayer() {
     });
 }
 
+
+/* ============================================
+   IN-PAGE PROJECT PLAYER
+============================================ */
+function initProjectPlayer() {
+    const player = document.getElementById('projectPlayer');
+    const media = document.getElementById('projectPlayerMedia');
+    const title = document.getElementById('projectPlayerTitle');
+    const message = document.getElementById('projectPlayerMessage');
+    if (!player || !media) return;
+    let lastFocused = null;
+
+    function close() {
+        player.classList.remove('is-open');
+        player.setAttribute('aria-hidden', 'true');
+        media.replaceChildren();
+        document.body.classList.remove('player-open');
+        if (lastFocused) lastFocused.focus();
+    }
+    function open(button) {
+        lastFocused = button;
+        const id = button.dataset.projectVideo;
+        title.textContent = button.dataset.projectTitle || 'Project Preview';
+        media.replaceChildren();
+        if (id) {
+            const frame = document.createElement('iframe');
+            frame.src = `https://www.tiktok.com/player/v1/${encodeURIComponent(id)}?description=1&music_info=1&rel=0`;
+            frame.title = `${title.textContent} video player`;
+            frame.allow = 'autoplay; fullscreen';
+            frame.allowFullscreen = true;
+            media.appendChild(frame);
+            message.textContent = 'Playing inside the portfolio.';
+        } else {
+            const image = document.createElement('img');
+            image.src = button.dataset.projectPoster;
+            image.alt = `${title.textContent} preview`;
+            media.appendChild(image);
+            message.textContent = 'Visual preview shown here. The full video will be added when its project file is uploaded.';
+        }
+        player.classList.add('is-open');
+        player.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('player-open');
+        player.querySelector('.project-player__close').focus();
+    }
+    document.querySelectorAll('.project-card__play').forEach(button => button.addEventListener('click', () => open(button)));
+    player.querySelectorAll('[data-player-close]').forEach(el => el.addEventListener('click', close));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && player.classList.contains('is-open')) close(); });
+}
+
 /* ============================================
    INIT — Master Function
 ============================================ */
@@ -654,6 +703,7 @@ function initAnimations() {
     initPortfolioFilter();
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) initMouseParallax();
     initReelPlayer();
+    initProjectPlayer();
     
     // Refresh ScrollTrigger after everything loads
     window.addEventListener('load', () => {
