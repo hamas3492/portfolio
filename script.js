@@ -6,7 +6,6 @@
    Table of Contents:
    1.  Preloader
    2.  Lenis Smooth Scroll + GSAP Sync
-   3.  Custom Cursor
    4.  Scroll Progress
    5.  Navigation
    6.  Hero Animations
@@ -14,9 +13,7 @@
    8.  Counters
    9.  Skills Animation
    10. Portfolio Filter
-   11. Testimonials Slider
    12. Mouse Parallax (Hero)
-   13. Gradient Movement
    ============================================ */
 
 // Register GSAP plugins
@@ -64,23 +61,22 @@ document.body.style.overflow = 'hidden';
 let lenis;
 
 function initLenis() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     lenis = new Lenis({
-        duration: 1.2,
+        duration: 0.75,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
         wheelMultiplier: 1,
-        touchMultiplier: 2,
+        touchMultiplier: 1.2,
+        syncTouch: false,
     });
 
     // Sync Lenis with ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
 
-    // RAF loop
-    function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+    // Share GSAP's ticker with Lenis and ScrollTrigger to avoid competing RAF loops.
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(1000, 16);
 
     // Anchor links smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -100,64 +96,7 @@ function initLenis() {
 }
 
 /* ============================================
-   3. CUSTOM CURSOR
-============================================ */
-function initCursor() {
-    const cursor = document.getElementById('cursor');
-    const cursorGlow = document.getElementById('cursorGlow');
-    if (!cursor || window.innerWidth <= 768) return;
-
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-    let glowX = 0, glowY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    // Smooth cursor follow (lerp)
-    function updateCursor() {
-        cursorX += (mouseX - cursorX) * 0.2;
-        cursorY += (mouseY - cursorY) * 0.2;
-        glowX += (mouseX - glowX) * 0.08;
-        glowY += (mouseY - glowY) * 0.08;
-        
-        cursor.style.transform = `translate(${cursorX - 6}px, ${cursorY - 6}px)`;
-        cursorGlow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%, -50%)`;
-        
-        requestAnimationFrame(updateCursor);
-    }
-    updateCursor();
-
-    // Cursor states on hoverable elements
-    const cursorStates = {
-        link: 'is-link',
-        play: 'is-play',
-        hover: 'is-link',
-    };
-
-    document.querySelectorAll('[data-cursor]').forEach(el => {
-        const state = cursorStates[el.dataset.cursor];
-        if (!state) return;
-        
-        el.addEventListener('mouseenter', () => cursor.classList.add(state));
-        el.addEventListener('mouseleave', () => cursor.classList.remove(state));
-    });
-
-    // Hide cursor when leaving window
-    document.addEventListener('mouseleave', () => {
-        cursor.style.opacity = '0';
-        cursorGlow.style.opacity = '0';
-    });
-    document.addEventListener('mouseenter', () => {
-        cursor.style.opacity = '1';
-        cursorGlow.style.opacity = '1';
-    });
-}
-
-/* ============================================
-   4. SCROLL PROGRESS
+   3. SCROLL PROGRESS
 ============================================ */
 function initScrollProgress() {
     const bar = document.getElementById('scrollProgressBar');
@@ -218,7 +157,7 @@ function initHero() {
     // Name reveal from mask
     tl.to('.hero__name', {
         y: 0,
-        duration: 1.2,
+        duration: 0.75,
         ease: 'power4.out',
         stagger: 0.15,
     })
@@ -255,7 +194,7 @@ function initHero() {
     .from('.hero__image-wrap', {
         scale: 0.9,
         opacity: 0,
-        duration: 1.2,
+        duration: 0.75,
         ease: 'power3.out',
     }, '-=1.5')
     .from('.hero__scroll', {
@@ -497,18 +436,6 @@ function initScrollAnimations() {
         });
     });
 
-    // === TESTIMONIALS ===
-    gsap.from('.testimonials__slider', {
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-            trigger: '.testimonials__slider',
-            start: 'top 80%',
-        }
-    });
-
     // === WHY CHOOSE ME ===
     document.querySelectorAll('.why__stat').forEach((stat, i) => {
         gsap.from(stat, {
@@ -658,70 +585,7 @@ function initPortfolioFilter() {
 }
 
 /* ============================================
-   10. TESTIMONIALS SLIDER
-============================================ */
-function initTestimonials() {
-    const track = document.getElementById('testimonialsTrack');
-    const prevBtn = document.getElementById('testPrev');
-    const nextBtn = document.getElementById('testNext');
-    const dotsContainer = document.getElementById('testDots');
-    
-    if (!track) return;
-
-    const cards = track.querySelectorAll('.testimonial-card');
-    const total = cards.length;
-    let current = 0;
-    let autoPlay;
-
-    // Create dots
-    for (let i = 0; i < total; i++) {
-        const dot = document.createElement('button');
-        dot.className = 'testimonials__dot' + (i === 0 ? ' is-active' : '');
-        dot.setAttribute('aria-label', `Testimonial ${i + 1}`);
-        dot.addEventListener('click', () => goTo(i));
-        dotsContainer.appendChild(dot);
-    }
-
-    const dots = dotsContainer.querySelectorAll('.testimonials__dot');
-
-    function goTo(index) {
-        current = index;
-        if (current < 0) current = total - 1;
-        if (current >= total) current = 0;
-
-        track.style.transform = `translateX(-${current * 100}%)`;
-        
-        dots.forEach((d, i) => {
-            d.classList.toggle('is-active', i === current);
-        });
-    }
-
-    function next() { goTo(current + 1); }
-    function prev() { goTo(current - 1); }
-
-    nextBtn.addEventListener('click', () => { next(); resetAutoPlay(); });
-    prevBtn.addEventListener('click', () => { prev(); resetAutoPlay(); });
-
-    // Auto-play
-    function startAutoPlay() {
-        autoPlay = setInterval(next, 5000);
-    }
-    
-    function resetAutoPlay() {
-        clearInterval(autoPlay);
-        startAutoPlay();
-    }
-
-    startAutoPlay();
-
-    // Pause on hover
-    const slider = document.getElementById('testimonialsSlider');
-    slider.addEventListener('mouseenter', () => clearInterval(autoPlay));
-    slider.addEventListener('mouseleave', startAutoPlay);
-}
-
-/* ============================================
-   11. MOUSE PARALLAX (HERO)
+   10. MOUSE PARALLAX (HERO)
 ============================================ */
 function initMouseParallax() {
     if (window.innerWidth <= 768) return;
@@ -737,52 +601,29 @@ function initMouseParallax() {
         { el: '.hero__gradient', strength: 0.01 },
     ];
 
+    const setters = layers.map(({ el, strength }) => {
+        const element = document.querySelector(el);
+        if (!element) return null;
+        return { strength, x: gsap.quickTo(element, 'x', { duration: 0.45, ease: 'power2.out' }), y: gsap.quickTo(element, 'y', { duration: 0.45, ease: 'power2.out' }) };
+    }).filter(Boolean);
+
+    let frame = 0;
+    let pending = null;
     hero.addEventListener('mousemove', (e) => {
-        const rect = hero.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-
-        layers.forEach(({ el, strength }) => {
-            const element = document.querySelector(el);
-            if (element) {
-                gsap.to(element, {
-                    x: x * strength,
-                    y: y * strength,
-                    duration: 1.5,
-                    ease: 'power2.out',
-                });
-            }
+        pending = e;
+        if (frame) return;
+        frame = requestAnimationFrame(() => {
+            const rect = hero.getBoundingClientRect();
+            const x = pending.clientX - rect.left - rect.width / 2;
+            const y = pending.clientY - rect.top - rect.height / 2;
+            setters.forEach(({ strength, x: setX, y: setY }) => { setX(x * strength); setY(y * strength); });
+            frame = 0;
         });
-    });
+    }, { passive: true });
 }
 
 /* ============================================
-   12. GRADIENT MOVEMENT
-============================================ */
-function initGradientMovement() {
-    const gradient = document.getElementById('heroGradient');
-    if (!gradient) return;
-
-    let angle = 135;
-    
-    function animateGradient() {
-        angle += 0.2;
-        if (angle > 360) angle = 135;
-        
-        gradient.style.background = `
-            radial-gradient(ellipse at ${30 + Math.sin(angle * 0.01) * 20}% ${20 + Math.cos(angle * 0.01) * 20}%, 
-                rgba(212, 175, 55, 0.15) 0%, transparent 50%),
-            radial-gradient(ellipse at ${70 + Math.cos(angle * 0.015) * 20}% ${80 + Math.sin(angle * 0.015) * 20}%, 
-                rgba(212, 175, 55, 0.08) 0%, transparent 50%)
-        `;
-        
-        requestAnimationFrame(animateGradient);
-    }
-    animateGradient();
-}
-
-/* ============================================
-   13. REEL PLAYER INTERACTION
+   12. REEL PLAYER INTERACTION
 ============================================ */
 function initReelPlayer() {
     const player = document.getElementById('reelPlayer');
@@ -805,16 +646,13 @@ function initReelPlayer() {
 ============================================ */
 function initAnimations() {
     initLenis();
-    initCursor();
     initScrollProgress();
     initNav();
     initHero();
     initScrollAnimations();
     initCounters();
     initPortfolioFilter();
-    initTestimonials();
-    initMouseParallax();
-    initGradientMovement();
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) initMouseParallax();
     initReelPlayer();
     
     // Refresh ScrollTrigger after everything loads
