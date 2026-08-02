@@ -2012,3 +2012,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
         min-height: 300px;
     }
 }
+
+
+/* Keep hero copy inside the viewport on narrow Android screens. */
+@media (max-width: 768px) {
+    .hero { width: 100%; max-width: 100vw; overflow: hidden; }
+    .hero__content { width: 100%; max-width: 100%; min-width: 0; padding-inline: 0; }
+    .hero__title { width: 100%; max-width: 100%; font-size: clamp(2.55rem, 13vw, 4.5rem); line-height: .98; letter-spacing: -.045em; overflow-wrap: anywhere; word-break: normal; }
+    .hero__name-line { max-width: 100%; overflow: visible; }
+    .hero__name { max-width: 100%; }
+    .hero__desc { width: 100%; max-width: 100%; padding-inline: 4px; font-size: .98rem; line-height: 1.6; overflow-wrap: break-word; }
+    .hero__subtitle-text { font-size: clamp(1rem, 4.5vw, 1.3rem); }
+}
