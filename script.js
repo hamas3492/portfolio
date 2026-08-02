@@ -669,7 +669,8 @@ function initProjectPlayer() {
             const frame = document.createElement('iframe');
             frame.src = `https://www.tiktok.com/player/v1/${encodeURIComponent(id)}?description=1&music_info=1&rel=0`;
             frame.title = `${title.textContent} video player`;
-            frame.allow = 'autoplay; fullscreen';
+            frame.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+            frame.loading = 'eager';
             frame.allowFullscreen = true;
             media.appendChild(frame);
             message.textContent = 'Playing inside the portfolio.';
