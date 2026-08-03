@@ -255,18 +255,14 @@ function initHero() {
    7. SCROLLTRIGGER ANIMATIONS
 ============================================ */
 function initScrollAnimations() {
-    // Section labels & titles — split text reveal
+    // Section labels & titles — premium masked reveal
     document.querySelectorAll('.section-title span').forEach(el => {
-        gsap.from(el, {
-            y: 60,
-            opacity: 0,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: el,
-                start: 'top 85%',
+        gsap.fromTo(el,
+            { yPercent: 120, opacity: 0 },
+            { yPercent: 0, opacity: 1, duration: 1.1, ease: 'power4.out',
+              scrollTrigger: { trigger: el, start: 'top 88%' }
             }
-        });
+        );
     });
 
     // Section labels
@@ -296,29 +292,6 @@ function initScrollAnimations() {
                 start: 'top 88%',
             }
         });
-    });
-
-    // === REEL ===
-    gsap.from('.reel__player', {
-        scale: 0.95,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-            trigger: '.reel',
-            start: 'top 70%',
-        }
-    });
-
-    // Reel play button scale on scroll
-    gsap.from('.reel__play-btn', {
-        scale: 0,
-        duration: 0.8,
-        ease: 'back.out(1.7)',
-        scrollTrigger: {
-            trigger: '.reel__player',
-            start: 'top 75%',
-        }
     });
 
     // === JOURNEY TIMELINE ===
@@ -365,34 +338,25 @@ function initScrollAnimations() {
     // === SERVICES ===
     const serviceCards = document.querySelectorAll('.service-card');
     serviceCards.forEach((card, i) => {
-        gsap.from(card, {
-            y: 60,
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            delay: (i % 3) * 0.1,
-            scrollTrigger: {
-                trigger: card,
-                start: 'top 85%',
+        gsap.fromTo(card,
+            { y: 80, opacity: 0, clipPath: 'inset(0 0 100% 0 round 12px)' },
+            { y: 0, opacity: 1, clipPath: 'inset(0 0 0% 0 round 12px)', duration: 1, ease: 'power4.out',
+              delay: (i % 3) * 0.1,
+              scrollTrigger: { trigger: card, start: 'top 85%' }
             }
-        });
+        );
     });
 
     // === PORTFOLIO ===
     const projectCards = document.querySelectorAll('.project-card');
     projectCards.forEach((card, i) => {
-        gsap.from(card, {
-            y: 80,
-            opacity: 0,
-            scale: 0.95,
-            duration: 0.9,
-            ease: 'power3.out',
-            delay: (i % 2) * 0.15,
-            scrollTrigger: {
-                trigger: card,
-                start: 'top 85%',
+        gsap.fromTo(card,
+            { y: 100, opacity: 0, clipPath: 'inset(100% 0 0 0 round 16px)' },
+            { y: 0, opacity: 1, clipPath: 'inset(0% 0 0 0 round 16px)', duration: 1.1, ease: 'power4.out',
+              delay: (i % 2) * 0.12,
+              scrollTrigger: { trigger: card, start: 'top 85%' }
             }
-        });
+        );
     });
 
     // Portfolio filter buttons
@@ -467,17 +431,12 @@ function initScrollAnimations() {
 
     // === CONTACT ===
     document.querySelectorAll('.contact-card').forEach((card, i) => {
-        gsap.from(card, {
-            y: 40,
-            opacity: 0,
-            duration: 0.7,
-            ease: 'power3.out',
-            delay: i * 0.1,
-            scrollTrigger: {
-                trigger: card,
-                start: 'top 88%',
-            }
-        });
+        gsap.fromTo(card,
+            { y: 60, opacity: 0, clipPath: 'inset(0 0 100% 0 round 12px)' },
+            { y: 0, opacity: 1, clipPath: 'inset(0 0 0% 0 round 12px)', duration: 0.9, ease: 'power4.out',
+              delay: i * 0.1,
+              scrollTrigger: { trigger: card, start: 'top 88%' }
+            });
     });
 
     gsap.from('.contact__big-cta', {
@@ -622,42 +581,29 @@ function initMouseParallax() {
     }, { passive: true });
 }
 
+
 /* ============================================
-   12. REEL PLAYER INTERACTION
+   12. INTERSECTION OBSERVER REVEALS
 ============================================ */
-function initReelPlayer() {
-    const player = document.getElementById('reelPlayer');
-    if (!player) return;
-    const thumbnail = player.querySelector('.reel__thumbnail');
-    const image = thumbnail?.querySelector('img');
-    const playButton = player.querySelector('.reel__play-btn');
-
-    // Cinematic reveal as the reel enters the viewport.
-    gsap.fromTo(player,
-        { y: 70, opacity: 0, clipPath: 'inset(12% 0 12% 0 round 18px)' },
-        { y: 0, opacity: 1, clipPath: 'inset(0% 0 0% 0 round 18px)', duration: 1.15, ease: 'power3.out',
-          scrollTrigger: { trigger: player, start: 'top 82%', once: true } }
-    );
-
-    if (playButton) {
-        playButton.addEventListener('click', () => {
-            gsap.fromTo(playButton, { scale: .86 }, { scale: 1, duration: .55, ease: 'elastic.out(1, .45)' });
+function initRevealObserver() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
         });
-    }
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
 
-    // Subtle pointer parallax gives the thumbnail the same premium depth as the reference.
-    if (thumbnail && image && !window.matchMedia('(pointer: coarse)').matches) {
-        thumbnail.addEventListener('pointermove', (event) => {
-            const rect = thumbnail.getBoundingClientRect();
-            const x = (event.clientX - rect.left) / rect.width - .5;
-            const y = (event.clientY - rect.top) / rect.height - .5;
-            gsap.to(image, { x: x * 12, y: y * 8, scale: 1.06, duration: .5, ease: 'power2.out', overwrite: true });
-        });
-        thumbnail.addEventListener('pointerleave', () => {
-            gsap.to(image, { x: 0, y: 0, scale: 1, duration: .8, ease: 'power3.out', overwrite: true });
-        });
-    }
+    document.querySelectorAll('[data-reveal], [data-reveal-clip], [data-reveal-up], [data-reveal-stagger]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Also observe section labels for premium line animation
+    document.querySelectorAll('.section-label').forEach(el => observer.observe(el));
 }
+
+
 
 
 /* ============================================
@@ -721,8 +667,8 @@ function initAnimations() {
     initCounters();
     initPortfolioFilter();
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) initMouseParallax();
-    initReelPlayer();
     initProjectPlayer();
+    initRevealObserver();
     
     // Refresh ScrollTrigger after everything loads
     window.addEventListener('load', () => {
