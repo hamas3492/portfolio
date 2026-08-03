@@ -152,61 +152,73 @@ function closeMobileMenu() {
    6. HERO ANIMATIONS
 ============================================ */
 function initHero() {
-    const tl = gsap.timeline();
-    
-    // Name reveal from mask
-    tl.to('.hero__name', {
-        y: 0,
-        duration: 0.75,
-        ease: 'power4.out',
-        stagger: 0.15,
-    })
-    .to('.hero__subtitle-text', {
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-    }, '-=0.8')
-    .to('.hero__desc', {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-    }, '-=0.6')
-    .to('.hero__actions', {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-    }, '-=0.5')
-    .to('.hero__stats', {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-    }, '-=0.5')
-    .from('.hero__floating', {
-        scale: 0,
-        opacity: 0,
-        duration: 0.6,
-        ease: 'back.out(1.7)',
-        stagger: 0.15,
-    }, '-=0.8')
-    .from('.hero__image-wrap', {
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.75,
-        ease: 'power3.out',
-    }, '-=1.5')
-    .from('.hero__scroll', {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        ease: 'power3.out',
-    }, '-=0.5');
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-    // Animate hero gradient on scroll (parallax)
-    gsap.to('.hero__gradient', {
-        backgroundPosition: '50% 100%',
+    // Tag
+    tl.fromTo('.hero__tag',
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7 }
+    );
+
+    // Name — dramatic mask reveal
+    tl.fromTo('.hero__name',
+        { yPercent: 120, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 1.2, stagger: 0.15 },
+        '-=0.3'
+    );
+
+    // Subtitle
+    tl.fromTo('.hero__subtitle-text',
+        { yPercent: 100, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 0.8 },
+        '-=0.6'
+    );
+
+    // Description
+    tl.fromTo('.hero__desc',
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8 },
+        '-=0.4'
+    );
+
+    // Buttons
+    tl.fromTo('.hero__actions .btn',
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, stagger: 0.1 },
+        '-=0.3'
+    );
+
+    // Stats
+    tl.fromTo('.hero__stat',
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, stagger: 0.12 },
+        '-=0.2'
+    );
+
+    // Image
+    tl.fromTo('.hero__image-wrap',
+        { clipPath: 'inset(100% 0 0 0 round 16px)', opacity: 0 },
+        { clipPath: 'inset(0% 0 0 0 round 16px)', opacity: 1, duration: 1.3, ease: 'power4.out' },
+        '-=1'
+    );
+
+    // Floating icons
+    tl.fromTo('.hero__floating',
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.6, stagger: 0.15, ease: 'back.out(1.7)' },
+        '-=0.4'
+    );
+
+    // Scroll indicator
+    tl.fromTo('.hero__scroll',
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5 },
+        '-=0.2'
+    );
+
+    // Parallax on scroll
+    gsap.to('.hero__image', {
+        yPercent: 15,
         ease: 'none',
         scrollTrigger: {
             trigger: '.hero',
@@ -216,82 +228,109 @@ function initHero() {
         }
     });
 
-    // Hero image parallax
-    gsap.to('.hero__image-wrap', {
-        y: -80,
+    // Hero background elements parallax
+    gsap.to('.hero__grid', {
+        yPercent: 20,
         ease: 'none',
-        scrollTrigger: {
-            trigger: '.hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true,
-        }
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
     });
 
-    // Floating elements parallax
-    gsap.to('.hero__floating--1', {
-        y: -120,
-        ease: 'none',
-        scrollTrigger: {
-            trigger: '.hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true,
-        }
-    });
-    gsap.to('.hero__floating--2', {
-        y: -80,
-        ease: 'none',
-        scrollTrigger: {
-            trigger: '.hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true,
-        }
-    });
+    // Mouse parallax on hero
+    if (!window.matchMedia('(pointer: coarse)').matches) {
+        const heroContent = document.querySelector('.hero__content');
+        const heroVisual = document.querySelector('.hero__visual');
+        if (!heroContent || !heroVisual) return;
+
+        let pending = null;
+        document.querySelector('.hero').addEventListener('pointermove', (e) => {
+            pending = e;
+            if (frame) return;
+            frame = requestAnimationFrame(() => {
+                const rect = heroContent.getBoundingClientRect();
+                const x = pending.clientX - rect.left - rect.width / 2;
+                const y = pending.clientY - rect.top - rect.height / 2;
+                gsap.to('.hero__floating--1', { x: x * 0.02, y: y * 0.02, duration: 0.8, ease: 'power2.out' });
+                gsap.to('.hero__floating--2', { x: x * 0.03, y: y * 0.03, duration: 0.8, ease: 'power2.out' });
+                gsap.to('.hero__floating--3', { x: x * 0.025, y: y * 0.025, duration: 0.8, ease: 'power2.out' });
+                frame = 0;
+            });
+        }, { passive: true });
+        let frame = 0;
+    }
 }
 
 /* ============================================
    7. SCROLLTRIGGER ANIMATIONS
 ============================================ */
 function initScrollAnimations() {
-    // Section labels & titles — premium masked reveal
-    document.querySelectorAll('.section-title span').forEach(el => {
-        gsap.fromTo(el,
-            { yPercent: 120, opacity: 0 },
-            { yPercent: 0, opacity: 1, duration: 1.1, ease: 'power4.out',
-              scrollTrigger: { trigger: el, start: 'top 88%' }
+    // ==========================================
+    // PREMIUM ANIMATIONS — Reference Video Style
+    // Clip-path mask wipes, text mask reveals,
+    // staggered card entrances, premium easing
+    // ==========================================
+
+    // === SECTION TITLES — Masked text reveal ===
+    document.querySelectorAll('.section-title').forEach(title => {
+        const spans = title.querySelectorAll('span');
+        spans.forEach((span, i) => {
+            // Wrap in mask container if not already
+            gsap.fromTo(span,
+                { yPercent: 120, opacity: 0 },
+                {
+                    yPercent: 0, opacity: 1,
+                    duration: 1.2,
+                    ease: 'power4.out',
+                    delay: i * 0.1,
+                    scrollTrigger: {
+                        trigger: title,
+                        start: 'top 85%',
+                        once: true,
+                    }
+                }
+            );
+        });
+    });
+
+    // === SECTION LABELS — Slide in from left with gold line ===
+    document.querySelectorAll('.section-label').forEach(label => {
+        const line = label.querySelector('.section-label__line');
+        const text = label.querySelector('span:last-child');
+        
+        gsap.fromTo(label,
+            { x: -40, opacity: 0 },
+            {
+                x: 0, opacity: 1,
+                duration: 0.9,
+                ease: 'power4.out',
+                scrollTrigger: { trigger: label, start: 'top 90%', once: true }
             }
         );
+        if (line) {
+            gsap.fromTo(line,
+                { scaleX: 0 },
+                {
+                    scaleX: 1,
+                    duration: 0.8,
+                    ease: 'power4.out',
+                    delay: 0.2,
+                    scrollTrigger: { trigger: label, start: 'top 90%', once: true }
+                }
+            );
+        }
     });
 
-    // Section labels
-    document.querySelectorAll('.section-label').forEach(el => {
-        gsap.from(el, {
-            x: -30,
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: el,
-                start: 'top 90%',
+    // === SECTION DESCRIPTIONS — Fade up ===
+    document.querySelectorAll('.section-desc').forEach(desc => {
+        gsap.fromTo(desc,
+            { y: 30, opacity: 0 },
+            {
+                y: 0, opacity: 1,
+                duration: 1,
+                ease: 'power3.out',
+                delay: 0.3,
+                scrollTrigger: { trigger: desc, start: 'top 88%', once: true }
             }
-        });
-    });
-
-    // Section descriptions
-    document.querySelectorAll('.section-desc').forEach(el => {
-        gsap.from(el, {
-            y: 30,
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            delay: 0.2,
-            scrollTrigger: {
-                trigger: el,
-                start: 'top 88%',
-            }
-        });
+        );
     });
 
     // === JOURNEY TIMELINE ===
@@ -307,160 +346,170 @@ function initScrollAnimations() {
         }
     });
 
-    // Journey cards reveal
+    // Journey cards — clip-path wipe reveal
     document.querySelectorAll('.journey__card').forEach((card, i) => {
         const isRight = card.classList.contains('journey__card--right');
-        gsap.from(card, {
-            x: isRight ? 60 : -60,
-            opacity: 0,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: card,
-                start: 'top 80%',
+        gsap.fromTo(card,
+            {
+                x: isRight ? 80 : -80,
+                opacity: 0,
+                clipPath: 'inset(0 0 100% 0 round 16px)',
+            },
+            {
+                x: 0,
+                opacity: 1,
+                clipPath: 'inset(0 0 0% 0 round 16px)',
+                duration: 1.1,
+                ease: 'power4.out',
+                delay: i * 0.05,
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 82%',
+                    once: true,
+                }
             }
-        });
-        
+        );
+
         // Dot pop
         const dot = card.querySelector('.journey__card-dot');
-        gsap.from(dot, {
-            scale: 0,
-            duration: 0.5,
-            ease: 'back.out(2)',
-            delay: 0.3,
-            scrollTrigger: {
-                trigger: card,
-                start: 'top 80%',
-            }
-        });
+        if (dot) {
+            gsap.fromTo(dot,
+                { scale: 0 },
+                {
+                    scale: 1,
+                    duration: 0.5,
+                    ease: 'back.out(2)',
+                    delay: 0.4,
+                    scrollTrigger: { trigger: card, start: 'top 80%', once: true }
+                }
+            );
+        }
     });
 
-    // === SERVICES ===
+    // === SERVICES — Clip-path reveal with stagger ===
     const serviceCards = document.querySelectorAll('.service-card');
     serviceCards.forEach((card, i) => {
         gsap.fromTo(card,
-            { y: 80, opacity: 0, clipPath: 'inset(0 0 100% 0 round 12px)' },
-            { y: 0, opacity: 1, clipPath: 'inset(0 0 0% 0 round 12px)', duration: 1, ease: 'power4.out',
-              delay: (i % 3) * 0.1,
-              scrollTrigger: { trigger: card, start: 'top 85%' }
+            {
+                y: 80,
+                opacity: 0,
+                clipPath: 'inset(0 0 100% 0 round 12px)',
+            },
+            {
+                y: 0,
+                opacity: 1,
+                clipPath: 'inset(0 0 0% 0 round 12px)',
+                duration: 1,
+                ease: 'power4.out',
+                delay: (i % 3) * 0.12,
+                scrollTrigger: { trigger: card, start: 'top 85%', once: true }
             }
         );
     });
 
-    // === PORTFOLIO ===
+    // === PORTFOLIO — Dramatic clip-path reveal ===
     const projectCards = document.querySelectorAll('.project-card');
     projectCards.forEach((card, i) => {
         gsap.fromTo(card,
-            { y: 100, opacity: 0, clipPath: 'inset(100% 0 0 0 round 16px)' },
-            { y: 0, opacity: 1, clipPath: 'inset(0% 0 0 0 round 16px)', duration: 1.1, ease: 'power4.out',
-              delay: (i % 2) * 0.12,
-              scrollTrigger: { trigger: card, start: 'top 85%' }
+            {
+                y: 100,
+                opacity: 0,
+                clipPath: 'inset(100% 0 0 0 round 16px)',
+            },
+            {
+                y: 0,
+                opacity: 1,
+                clipPath: 'inset(0% 0 0 0 round 16px)',
+                duration: 1.2,
+                ease: 'power4.out',
+                delay: (i % 2) * 0.15,
+                scrollTrigger: { trigger: card, start: 'top 85%', once: true }
             }
         );
     });
 
     // Portfolio filter buttons
-    gsap.from('.portfolio__filter', {
-        y: 20,
-        opacity: 0,
-        duration: 0.5,
-        ease: 'power3.out',
-        stagger: 0.08,
-        scrollTrigger: {
-            trigger: '.portfolio__filters',
-            start: 'top 90%',
+    gsap.fromTo('.portfolio__filter',
+        { y: 20, opacity: 0 },
+        {
+            y: 0, opacity: 1,
+            duration: 0.6,
+            ease: 'power3.out',
+            stagger: 0.08,
+            scrollTrigger: { trigger: '.portfolio__filters', start: 'top 90%', once: true }
         }
-    });
+    );
 
-    // === SKILLS ===
+    // === SKILLS — Slide in with bar fill ===
     document.querySelectorAll('.skill-bar').forEach((bar, i) => {
         const fill = bar.querySelector('.skill-bar__fill');
         const value = fill.dataset.fill;
+        
+        gsap.fromTo(bar,
+            { x: -40, opacity: 0 },
+            {
+                x: 0, opacity: 1,
+                duration: 0.9,
+                ease: 'power4.out',
+                delay: i * 0.08,
+                scrollTrigger: { trigger: bar, start: 'top 88%', once: true }
+            }
+        );
         
         gsap.to(fill, {
             width: value + '%',
             duration: 1.5,
             ease: 'power3.out',
-            delay: i * 0.1,
-            scrollTrigger: {
-                trigger: bar,
-                start: 'top 85%',
-            }
-        });
-        
-        gsap.from(bar, {
-            opacity: 0,
-            x: -30,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: bar,
-                start: 'top 88%',
-            }
+            delay: i * 0.08 + 0.3,
+            scrollTrigger: { trigger: bar, start: 'top 85%', once: true }
         });
     });
 
-    // === WHY CHOOSE ME ===
+    // === WHY CHOOSE ME — Staggered reveals ===
     document.querySelectorAll('.why__stat').forEach((stat, i) => {
-        gsap.from(stat, {
-            y: 40,
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            delay: (i % 2) * 0.1,
-            scrollTrigger: {
-                trigger: stat,
-                start: 'top 85%',
+        gsap.fromTo(stat,
+            { y: 50, opacity: 0, clipPath: 'inset(0 0 100% 0 round 12px)' },
+            {
+                y: 0, opacity: 1, clipPath: 'inset(0 0 0% 0 round 12px)',
+                duration: 0.9, ease: 'power4.out',
+                delay: (i % 2) * 0.12,
+                scrollTrigger: { trigger: stat, start: 'top 85%', once: true }
             }
-        });
+        );
     });
 
     document.querySelectorAll('.why__reason').forEach((reason, i) => {
-        gsap.from(reason, {
-            x: 40,
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            delay: i * 0.12,
-            scrollTrigger: {
-                trigger: reason,
-                start: 'top 85%',
+        gsap.fromTo(reason,
+            { x: 50, opacity: 0 },
+            {
+                x: 0, opacity: 1,
+                duration: 0.9, ease: 'power4.out',
+                delay: i * 0.1,
+                scrollTrigger: { trigger: reason, start: 'top 85%', once: true }
             }
-        });
+        );
     });
 
-    // === CONTACT ===
+    // === CONTACT — Clip-path reveal ===
     document.querySelectorAll('.contact-card').forEach((card, i) => {
         gsap.fromTo(card,
             { y: 60, opacity: 0, clipPath: 'inset(0 0 100% 0 round 12px)' },
-            { y: 0, opacity: 1, clipPath: 'inset(0 0 0% 0 round 12px)', duration: 0.9, ease: 'power4.out',
-              delay: i * 0.1,
-              scrollTrigger: { trigger: card, start: 'top 88%' }
-            });
-    });
-
-    gsap.from('.contact__big-cta', {
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-            trigger: '.contact__big-cta',
-            start: 'top 90%',
-        }
+            {
+                y: 0, opacity: 1, clipPath: 'inset(0 0 0% 0 round 12px)',
+                duration: 0.9, ease: 'power4.out',
+                delay: i * 0.1,
+                scrollTrigger: { trigger: card, start: 'top 88%', once: true }
+            }
+        );
     });
 
     // === FOOTER ===
-    gsap.from('.footer__top, .footer__bottom', {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        stagger: 0.15,
-        scrollTrigger: {
-            trigger: '.footer',
-            start: 'top 95%',
-        }
+    gsap.fromTo('.footer__content', {
+        y: 40, opacity: 0
+    }, {
+        y: 0, opacity: 1,
+        duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.footer__content', start: 'top 90%', once: true }
     });
 }
 
@@ -582,27 +631,6 @@ function initMouseParallax() {
 }
 
 
-/* ============================================
-   12. INTERSECTION OBSERVER REVEALS
-============================================ */
-function initRevealObserver() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-
-    document.querySelectorAll('[data-reveal], [data-reveal-clip], [data-reveal-up], [data-reveal-stagger]').forEach(el => {
-        observer.observe(el);
-    });
-
-    // Also observe section labels for premium line animation
-    document.querySelectorAll('.section-label').forEach(el => observer.observe(el));
-}
-
 
 
 
@@ -668,7 +696,6 @@ function initAnimations() {
     initPortfolioFilter();
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) initMouseParallax();
     initProjectPlayer();
-    initRevealObserver();
     
     // Refresh ScrollTrigger after everything loads
     window.addEventListener('load', () => {
