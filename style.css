@@ -566,6 +566,8 @@ ul {
 
 .hero__name-line {
     display: block;
+    padding-bottom: 0.12em;
+    line-height: 1.1;
     overflow: hidden;
 }
 
@@ -583,6 +585,7 @@ ul {
 
 .hero__subtitle {
     margin-bottom: 28px;
+    padding-bottom: 0.1em;
     overflow: hidden;
 }
 
