@@ -2024,3 +2024,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
     .hero__desc { width: 100%; max-width: 100%; padding-inline: 4px; font-size: .98rem; line-height: 1.6; overflow-wrap: break-word; }
     .hero__subtitle-text { font-size: clamp(1rem, 4.5vw, 1.3rem); }
 }
+
+
+.reel__video { width: 100%; height: 100%; display: block; object-fit: cover; position: absolute; inset: 0; background: var(--black); }
+.reel__thumbnail { position: relative; overflow: hidden; }
+.reel__thumbnail .reel__overlay { z-index: 1; pointer-events: none; }
+.reel__thumbnail .reel__play { z-index: 2; pointer-events: none; }
+.reel__player.is-playing .reel__play { opacity: 0; transition: opacity .25s ease; }
+.reel__player.is-playing:hover .reel__play { opacity: 1; }
