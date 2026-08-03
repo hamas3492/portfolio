@@ -134,62 +134,62 @@ function initHero() {
     // The entire hero content rises up from below as one block
     tl.fromTo('.hero__content',
         { yPercent: 30, opacity: 0 },
-        { yPercent: 0, opacity: 1, duration: 1.4, ease: 'power4.out' }
+        { yPercent: 0, opacity: 1, duration: 2, ease: 'power3.out' }
     );
 
     // Hero visual slides in from the right
     tl.fromTo('.hero__visual',
         { xPercent: 20, opacity: 0 },
-        { xPercent: 0, opacity: 1, duration: 1.2, ease: 'power4.out' },
-        '-=1.2'
+        { xPercent: 0, opacity: 1, duration: 1.8, ease: 'power3.out' },
+        '-=1.6'
     );
 
     // Within the hero, text elements have a subtle stagger
     tl.fromTo('.hero__tag',
         { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6 },
-        '-=0.8'
+        { y: 0, opacity: 1, duration: 0.9 },
+        '-=1.2'
     );
 
     // Name lines — mask reveal (slide up from behind overflow:hidden)
     tl.fromTo('.hero__name',
         { yPercent: 110 },
-        { yPercent: 0, duration: 1, stagger: 0.12 },
-        '-=0.6'
+        { yPercent: 0, duration: 1.4, stagger: 0.15 },
+        '-=0.8'
     );
 
     // Subtitle — mask reveal
     tl.fromTo('.hero__subtitle-text',
         { yPercent: 100 },
-        { yPercent: 0, duration: 0.8 },
-        '-=0.5'
+        { yPercent: 0, duration: 1.2 },
+        '-=0.7'
     );
 
     // Description
     tl.fromTo('.hero__desc',
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7 },
-        '-=0.4'
+        { y: 25, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1 },
+        '-=0.6'
     );
 
     // Buttons
     tl.fromTo('.hero__actions .btn',
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.08 },
-        '-=0.3'
+        { y: 25, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, stagger: 0.12 },
+        '-=0.4'
     );
 
     // Stats
     tl.fromTo('.hero__stat',
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, stagger: 0.1 },
-        '-=0.2'
+        { y: 25, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.12 },
+        '-=0.3'
     );
 
     // Floating icons — pop in
     tl.fromTo('.hero__floating',
         { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.5, stagger: 0.12, ease: 'back.out(1.7)' },
+        { scale: 1, opacity: 1, duration: 0.7, stagger: 0.15, ease: 'back.out(1.7)' },
         '-=0.3'
     );
 
@@ -219,24 +219,53 @@ function initHero() {
    Each SECTION rises up from the bottom as one block.
    Internal elements have subtle stagger within the block.
 ============================================ */
+
+    /* ============================================
+       SCROLL-TRIGGERED ANIMATIONS
+       Style: Each section rises up as one block on scroll.
+       Internal elements have subtle stagger within the block.
+       Key fix: immediateRender:false so elements are VISIBLE by default
+       and only get hidden right before the animation fires.
+       Durations are slow and cinematic.
+    ============================================ */
 function initScrollAnimations() {
 
-    // === JOURNEY SECTION — rises up as one block ===
-    const journeyContainer = document.querySelector('.journey .container');
-    if (journeyContainer) {
-        const tl1 = gsap.timeline({
-            scrollTrigger: { trigger: '.journey', start: 'top 75%', once: true }
-        });
-        tl1.fromTo(journeyContainer,
-            { y: 100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' }
-        );
-        tl1.fromTo('.journey .section-title span',
-            { yPercent: 110 },
-            { yPercent: 0, duration: 1, stagger: 0.1, ease: 'power4.out' },
-            '-=0.6'
+    // Helper: create a section reveal — y movement only, NO opacity on container
+    function revealSection(selector, delay = 0) {
+        const container = document.querySelector(selector + ' .container') || document.querySelector(selector);
+        if (!container) return;
+        gsap.fromTo(container,
+            { y: 80, opacity: 0 },
+            {
+                y: 0, opacity: 1,
+                duration: 1.6, ease: 'power3.out',
+                delay: delay,
+                immediateRender: false,
+                scrollTrigger: { trigger: selector, start: 'top 80%', once: true }
+            }
         );
     }
+
+    // Helper: reveal section title with mask
+    function revealTitle(selector, delay = 0) {
+        const spans = document.querySelectorAll(selector + ' .section-title span');
+        if (!spans.length) return;
+        gsap.fromTo(spans,
+            { yPercent: 110 },
+            {
+                yPercent: 0,
+                duration: 1.4, ease: 'power4.out',
+                stagger: 0.12,
+                delay: delay,
+                immediateRender: false,
+                scrollTrigger: { trigger: selector, start: 'top 80%', once: true }
+            }
+        );
+    }
+
+    // === JOURNEY SECTION ===
+    revealSection('.journey');
+    revealTitle('.journey', 0.3);
 
     // Journey progress line
     gsap.to('#journeyProgress', {
@@ -245,205 +274,164 @@ function initScrollAnimations() {
         scrollTrigger: { trigger: '.journey__timeline', start: 'top 60%', end: 'bottom 60%', scrub: true }
     });
 
-    // Journey cards — subtle stagger within the block
+    // Journey cards
     document.querySelectorAll('.journey__card').forEach((card, i) => {
         const isRight = card.classList.contains('journey__card--right');
         gsap.fromTo(card,
-            { x: isRight ? 50 : -50, opacity: 0 },
+            { x: isRight ? 60 : -60, opacity: 0 },
             {
                 x: 0, opacity: 1,
-                duration: 0.9, ease: 'power4.out',
-                delay: 0.1 + i * 0.08,
-                scrollTrigger: { trigger: card, start: 'top 85%', once: true }
+                duration: 1.2, ease: 'power3.out',
+                delay: 0.1 + i * 0.1,
+                immediateRender: false,
+                scrollTrigger: { trigger: card, start: 'top 88%', once: true }
             }
         );
         const dot = card.querySelector('.journey__card-dot');
         if (dot) {
-            gsap.fromTo(dot, { scale: 0 },
-                { scale: 1, duration: 0.4, ease: 'back.out(2)', delay: 0.3,
-                  scrollTrigger: { trigger: card, start: 'top 82%', once: true }
+            gsap.fromTo(dot,
+                { scale: 0 },
+                {
+                    scale: 1, duration: 0.6, ease: 'back.out(2)', delay: 0.4,
+                    immediateRender: false,
+                    scrollTrigger: { trigger: card, start: 'top 85%', once: true }
                 });
         }
     });
 
-    // === SERVICES SECTION — rises up as one block ===
-    const servicesContainer = document.querySelector('.services .container');
-    if (servicesContainer) {
-        const tl2 = gsap.timeline({
-            scrollTrigger: { trigger: '.services', start: 'top 75%', once: true }
-        });
-        tl2.fromTo(servicesContainer,
-            { y: 100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' }
-        );
-        tl2.fromTo('.services .section-title span',
-            { yPercent: 110 },
-            { yPercent: 0, duration: 1, stagger: 0.1, ease: 'power4.out' },
-            '-=0.6'
-        );
-    }
+    // === SERVICES SECTION ===
+    revealSection('.services');
+    revealTitle('.services', 0.3);
 
-    // Service cards — stagger within the block
     document.querySelectorAll('.service-card').forEach((card, i) => {
         gsap.fromTo(card,
-            { y: 50, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, ease: 'power4.out',
-              delay: 0.15 + (i % 3) * 0.1,
-              scrollTrigger: { trigger: card, start: 'top 88%', once: true }
+            { y: 60, opacity: 0 },
+            {
+                y: 0, opacity: 1,
+                duration: 1.1, ease: 'power3.out',
+                delay: 0.2 + (i % 3) * 0.12,
+                immediateRender: false,
+                scrollTrigger: { trigger: card, start: 'top 90%', once: true }
             });
     });
 
-    // === PORTFOLIO SECTION — rises up as one block ===
-    const portfolioContainer = document.querySelector('.portfolio .container');
-    if (portfolioContainer) {
-        const tl3 = gsap.timeline({
-            scrollTrigger: { trigger: '.portfolio', start: 'top 75%', once: true }
-        });
-        tl3.fromTo(portfolioContainer,
-            { y: 100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' }
-        );
-        tl3.fromTo('.portfolio .section-title span',
-            { yPercent: 110 },
-            { yPercent: 0, duration: 1, stagger: 0.1, ease: 'power4.out' },
-            '-=0.6'
-        );
-    }
+    // === PORTFOLIO SECTION ===
+    revealSection('.portfolio');
+    revealTitle('.portfolio', 0.3);
 
     // Portfolio filter buttons
     gsap.fromTo('.portfolio__filter',
-        { y: 15, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out', stagger: 0.06,
-          scrollTrigger: { trigger: '.portfolio__filters', start: 'top 90%', once: true }
+        { y: 20, opacity: 0 },
+        {
+            y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', stagger: 0.08,
+            immediateRender: false,
+            scrollTrigger: { trigger: '.portfolio__filters', start: 'top 92%', once: true }
         });
 
-    // Project cards — stagger within the block
+    // Project cards
     document.querySelectorAll('.project-card').forEach((card, i) => {
         gsap.fromTo(card,
-            { y: 60, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.9, ease: 'power4.out',
-              delay: (i % 2) * 0.1,
-              scrollTrigger: { trigger: card, start: 'top 88%', once: true }
+            { y: 70, opacity: 0 },
+            {
+                y: 0, opacity: 1,
+                duration: 1.2, ease: 'power3.out',
+                delay: (i % 2) * 0.12,
+                immediateRender: false,
+                scrollTrigger: { trigger: card, start: 'top 90%', once: true }
             });
     });
 
-    // === SKILLS SECTION — rises up as one block ===
-    const skillsContainer = document.querySelector('.skills .container');
-    if (skillsContainer) {
-        const tl4 = gsap.timeline({
-            scrollTrigger: { trigger: '.skills', start: 'top 75%', once: true }
-        });
-        tl4.fromTo(skillsContainer,
-            { y: 100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' }
-        );
-        tl4.fromTo('.skills .section-title span',
-            { yPercent: 110 },
-            { yPercent: 0, duration: 1, stagger: 0.1, ease: 'power4.out' },
-            '-=0.6'
-        );
-    }
+    // === SKILLS SECTION ===
+    revealSection('.skills');
+    revealTitle('.skills', 0.3);
 
-    // Skill bars — stagger with fill
     document.querySelectorAll('.skill-bar').forEach((bar, i) => {
         gsap.fromTo(bar,
-            { x: -30, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.7, ease: 'power4.out',
-              delay: i * 0.06,
-              scrollTrigger: { trigger: bar, start: 'top 90%', once: true }
+            { x: -40, opacity: 0 },
+            {
+                x: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                delay: i * 0.08,
+                immediateRender: false,
+                scrollTrigger: { trigger: bar, start: 'top 92%', once: true }
             });
         const fill = bar.querySelector('.skill-bar__fill');
         if (fill && fill.dataset.fill) {
             gsap.to(fill, {
                 width: fill.dataset.fill + '%',
-                duration: 1.3, ease: 'power3.out',
-                delay: i * 0.06 + 0.2,
-                scrollTrigger: { trigger: bar, start: 'top 88%', once: true }
+                duration: 1.8, ease: 'power3.out',
+                delay: i * 0.08 + 0.3,
+                scrollTrigger: { trigger: bar, start: 'top 90%', once: true }
             });
         }
     });
 
-    // === WHY SECTION — rises up as one block ===
-    const whyContainer = document.querySelector('.why .container');
-    if (whyContainer) {
-        const tl5 = gsap.timeline({
-            scrollTrigger: { trigger: '.why', start: 'top 75%', once: true }
-        });
-        tl5.fromTo(whyContainer,
-            { y: 100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' }
-        );
-        tl5.fromTo('.why .section-title span',
-            { yPercent: 110 },
-            { yPercent: 0, duration: 1, stagger: 0.1, ease: 'power4.out' },
-            '-=0.6'
-        );
-    }
+    // === WHY SECTION ===
+    revealSection('.why');
+    revealTitle('.why', 0.3);
 
     document.querySelectorAll('.why__stat').forEach((stat, i) => {
         gsap.fromTo(stat,
-            { y: 40, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, ease: 'power4.out',
-              delay: (i % 2) * 0.1,
-              scrollTrigger: { trigger: stat, start: 'top 88%', once: true }
+            { y: 50, opacity: 0 },
+            {
+                y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                delay: (i % 2) * 0.12,
+                immediateRender: false,
+                scrollTrigger: { trigger: stat, start: 'top 90%', once: true }
             });
     });
 
     document.querySelectorAll('.why__reason').forEach((reason, i) => {
         gsap.fromTo(reason,
-            { x: 40, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.8, ease: 'power4.out',
-              delay: i * 0.08,
-              scrollTrigger: { trigger: reason, start: 'top 88%', once: true }
+            { x: 50, opacity: 0 },
+            {
+                x: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                delay: i * 0.1,
+                immediateRender: false,
+                scrollTrigger: { trigger: reason, start: 'top 90%', once: true }
             });
     });
 
-    // === CONTACT SECTION — rises up as one block ===
-    const contactContainer = document.querySelector('.contact .container');
-    if (contactContainer) {
-        const tl6 = gsap.timeline({
-            scrollTrigger: { trigger: '.contact', start: 'top 75%', once: true }
-        });
-        tl6.fromTo(contactContainer,
-            { y: 100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' }
-        );
-        tl6.fromTo('.contact .section-title span',
-            { yPercent: 110 },
-            { yPercent: 0, duration: 1, stagger: 0.1, ease: 'power4.out' },
-            '-=0.6'
-        );
-    }
+    // === CONTACT SECTION ===
+    revealSection('.contact');
+    revealTitle('.contact', 0.3);
 
     document.querySelectorAll('.contact-card').forEach((card, i) => {
         gsap.fromTo(card,
-            { y: 40, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.7, ease: 'power4.out',
-              delay: i * 0.08,
-              scrollTrigger: { trigger: card, start: 'top 90%', once: true }
+            { y: 50, opacity: 0 },
+            {
+                y: 0, opacity: 1, duration: 0.9, ease: 'power3.out',
+                delay: i * 0.1,
+                immediateRender: false,
+                scrollTrigger: { trigger: card, start: 'top 92%', once: true }
             });
     });
 
     // === FOOTER ===
     gsap.fromTo('.footer__content',
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: 'power3.out',
-          scrollTrigger: { trigger: '.footer__content', start: 'top 92%', once: true }
+        { y: 50, opacity: 0 },
+        {
+            y: 0, opacity: 1, duration: 1.4, ease: 'power3.out',
+            immediateRender: false,
+            scrollTrigger: { trigger: '.footer__content', start: 'top 94%', once: true }
         });
 
-    // === SECTION LABELS — slide in from left ===
+    // === SECTION LABELS ===
     document.querySelectorAll('.section-label').forEach(label => {
         gsap.fromTo(label,
-            { x: -30, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.8, ease: 'power4.out',
-              scrollTrigger: { trigger: label, start: 'top 90%', once: true }
+            { x: -40, opacity: 0 },
+            {
+                x: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                immediateRender: false,
+                scrollTrigger: { trigger: label, start: 'top 92%', once: true }
             });
         const line = label.querySelector('.section-label__line');
         if (line) {
             gsap.fromTo(line,
                 { scaleX: 0 },
-                { scaleX: 1, duration: 0.6, ease: 'power4.out', delay: 0.15,
-                  scrollTrigger: { trigger: label, start: 'top 90%', once: true }
+                {
+                    scaleX: 1, duration: 0.8, ease: 'power3.out', delay: 0.2,
+                    immediateRender: false,
+                    scrollTrigger: { trigger: label, start: 'top 92%', once: true }
                 });
         }
     });
@@ -451,16 +439,14 @@ function initScrollAnimations() {
     // === SECTION DESCRIPTIONS ===
     document.querySelectorAll('.section-desc').forEach(desc => {
         gsap.fromTo(desc,
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.2,
-              scrollTrigger: { trigger: desc, start: 'top 90%', once: true }
+            { y: 25, opacity: 0 },
+            {
+                y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.3,
+                immediateRender: false,
+                scrollTrigger: { trigger: desc, start: 'top 92%', once: true }
             });
     });
 }
-
-/* ============================================
-   8. COUNTERS
-============================================ */
 function initCounters() {
     const counters = document.querySelectorAll('[data-count]');
     
@@ -625,6 +611,7 @@ function initProjectPlayer() {
    INIT — Master Function
 ============================================ */
 function initAnimations() {
+    document.body.classList.add("gsap-ready");
     initLenis();
     initScrollProgress();
     initNav();
