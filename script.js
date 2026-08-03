@@ -628,17 +628,34 @@ function initMouseParallax() {
 function initReelPlayer() {
     const player = document.getElementById('reelPlayer');
     if (!player) return;
-
-    const video = document.getElementById('showreelVideo');
+    const thumbnail = player.querySelector('.reel__thumbnail');
+    const image = thumbnail?.querySelector('img');
     const playButton = player.querySelector('.reel__play-btn');
-    if (video && playButton) {
-        playButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (video.paused) video.play().catch(() => {});
-            else video.pause();
+
+    // Cinematic reveal as the reel enters the viewport.
+    gsap.fromTo(player,
+        { y: 70, opacity: 0, clipPath: 'inset(12% 0 12% 0 round 18px)' },
+        { y: 0, opacity: 1, clipPath: 'inset(0% 0 0% 0 round 18px)', duration: 1.15, ease: 'power3.out',
+          scrollTrigger: { trigger: player, start: 'top 82%', once: true } }
+    );
+
+    if (playButton) {
+        playButton.addEventListener('click', () => {
+            gsap.fromTo(playButton, { scale: .86 }, { scale: 1, duration: .55, ease: 'elastic.out(1, .45)' });
         });
-        video.addEventListener('play', () => player.classList.add('is-playing'));
-        video.addEventListener('pause', () => player.classList.remove('is-playing'));
+    }
+
+    // Subtle pointer parallax gives the thumbnail the same premium depth as the reference.
+    if (thumbnail && image && !window.matchMedia('(pointer: coarse)').matches) {
+        thumbnail.addEventListener('pointermove', (event) => {
+            const rect = thumbnail.getBoundingClientRect();
+            const x = (event.clientX - rect.left) / rect.width - .5;
+            const y = (event.clientY - rect.top) / rect.height - .5;
+            gsap.to(image, { x: x * 12, y: y * 8, scale: 1.06, duration: .5, ease: 'power2.out', overwrite: true });
+        });
+        thumbnail.addEventListener('pointerleave', () => {
+            gsap.to(image, { x: 0, y: 0, scale: 1, duration: .8, ease: 'power3.out', overwrite: true });
+        });
     }
 }
 
