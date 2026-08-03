@@ -571,7 +571,6 @@ ul {
 
 .hero__name {
     display: block;
-    transform: translateY(100%);
     will-change: transform;
 }
 
@@ -594,9 +593,7 @@ ul {
     font-weight: 400;
     color: var(--gold);
     letter-spacing: 0.05em;
-    transform: translateY(100%);
     will-change: transform;
-}
 
 .hero__desc {
     font-size: 1.05rem;
@@ -605,14 +602,14 @@ ul {
     margin-bottom: 40px;
     max-width: 480px;
     line-height: 1.7;
-    opacity: 0;
+    opacity: 1;
 }
 
 .hero__actions {
     display: flex;
     gap: 16px;
     margin-bottom: 60px;
-    opacity: 0;
+    opacity: 1;
 }
 
 /* Buttons */
@@ -666,7 +663,7 @@ ul {
 .hero__stats {
     display: flex;
     gap: 48px;
-    opacity: 0;
+    opacity: 1;
 }
 
 .hero__stat {
