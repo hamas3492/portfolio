@@ -1,19 +1,7 @@
 /* ============================================
    PREMIUM PORTFOLIO — HAMAS AHMED
    JavaScript: Animations & Interactions
-   ============================================
-   
-   Table of Contents:
-   1.  Preloader
-   2.  Lenis Smooth Scroll + GSAP Sync
-   4.  Scroll Progress
-   5.  Navigation
-   6.  Hero Animations
-   7.  ScrollTrigger Animations
-   8.  Counters
-   9.  Skills Animation
-   10. Portfolio Filter
-   12. Mouse Parallax (Hero)
+   Reference-style: section-level curtain reveals
    ============================================ */
 
 // Register GSAP plugins
@@ -71,24 +59,16 @@ function initLenis() {
         syncTouch: false,
     });
 
-    // Sync Lenis with ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
-
-    // Share GSAP's ticker with Lenis and ScrollTrigger to avoid competing RAF loops.
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(1000, 16);
 
-    // Anchor links smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', (e) => {
             const target = document.querySelector(link.getAttribute('href'));
             if (target) {
                 e.preventDefault();
-                lenis.scrollTo(target, {
-                    offset: -80,
-                    duration: 1.5,
-                });
-                // Close mobile menu if open
+                lenis.scrollTo(target, { offset: -80, duration: 1.5 });
                 closeMobileMenu();
             }
         });
@@ -121,16 +101,11 @@ function initNav() {
     const burger = document.getElementById('navBurger');
     const mobileMenu = document.getElementById('mobileMenu');
 
-    // Scrolled state
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 60) {
-            nav.classList.add('is-scrolled');
-        } else {
-            nav.classList.remove('is-scrolled');
-        }
+        if (window.scrollY > 60) nav.classList.add('is-scrolled');
+        else nav.classList.remove('is-scrolled');
     }, { passive: true });
 
-    // Burger toggle
     burger.addEventListener('click', () => {
         burger.classList.toggle('is-open');
         mobileMenu.classList.toggle('is-open');
@@ -150,366 +125,336 @@ function closeMobileMenu() {
 
 /* ============================================
    6. HERO ANIMATIONS
+   The ENTIRE hero content rises up as one block
+   when the preloader finishes — like a curtain lift.
 ============================================ */
 function initHero() {
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-    // Tag
+    // The entire hero content rises up from below as one block
+    tl.fromTo('.hero__content',
+        { yPercent: 30, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 1.4, ease: 'power4.out' }
+    );
+
+    // Hero visual slides in from the right
+    tl.fromTo('.hero__visual',
+        { xPercent: 20, opacity: 0 },
+        { xPercent: 0, opacity: 1, duration: 1.2, ease: 'power4.out' },
+        '-=1.2'
+    );
+
+    // Within the hero, text elements have a subtle stagger
     tl.fromTo('.hero__tag',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7 }
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6 },
+        '-=0.8'
     );
 
-    // Name — dramatic mask reveal
+    // Name lines — mask reveal (slide up from behind overflow:hidden)
     tl.fromTo('.hero__name',
-        { yPercent: 120, opacity: 0 },
-        { yPercent: 0, opacity: 1, duration: 1.2, stagger: 0.15 },
-        '-=0.3'
+        { yPercent: 110 },
+        { yPercent: 0, duration: 1, stagger: 0.12 },
+        '-=0.6'
     );
 
-    // Subtitle
+    // Subtitle — mask reveal
     tl.fromTo('.hero__subtitle-text',
-        { yPercent: 100, opacity: 0 },
-        { yPercent: 0, opacity: 1, duration: 0.8 },
-        '-=0.6'
+        { yPercent: 100 },
+        { yPercent: 0, duration: 0.8 },
+        '-=0.5'
     );
 
     // Description
     tl.fromTo('.hero__desc',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 },
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7 },
         '-=0.4'
     );
 
     // Buttons
     tl.fromTo('.hero__actions .btn',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, stagger: 0.1 },
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.08 },
         '-=0.3'
     );
 
     // Stats
     tl.fromTo('.hero__stat',
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, stagger: 0.12 },
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, stagger: 0.1 },
         '-=0.2'
     );
 
-    // Image
-    tl.fromTo('.hero__image-wrap',
-        { clipPath: 'inset(100% 0 0 0 round 16px)', opacity: 0 },
-        { clipPath: 'inset(0% 0 0 0 round 16px)', opacity: 1, duration: 1.3, ease: 'power4.out' },
-        '-=1'
-    );
-
-    // Floating icons
+    // Floating icons — pop in
     tl.fromTo('.hero__floating',
         { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.6, stagger: 0.15, ease: 'back.out(1.7)' },
-        '-=0.4'
+        { scale: 1, opacity: 1, duration: 0.5, stagger: 0.12, ease: 'back.out(1.7)' },
+        '-=0.3'
     );
 
     // Scroll indicator
     tl.fromTo('.hero__scroll',
         { opacity: 0 },
-        { opacity: 1, duration: 0.5 },
-        '-=0.2'
+        { opacity: 1, duration: 0.4 },
+        '-=0.1'
     );
 
     // Parallax on scroll
     gsap.to('.hero__image', {
         yPercent: 15,
         ease: 'none',
-        scrollTrigger: {
-            trigger: '.hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true,
-        }
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
     });
 
-    // Hero background elements parallax
     gsap.to('.hero__grid', {
         yPercent: 20,
         ease: 'none',
         scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
     });
-
-    // Mouse parallax on hero
-    if (!window.matchMedia('(pointer: coarse)').matches) {
-        const heroContent = document.querySelector('.hero__content');
-        const heroVisual = document.querySelector('.hero__visual');
-        if (!heroContent || !heroVisual) return;
-
-        let pending = null;
-        document.querySelector('.hero').addEventListener('pointermove', (e) => {
-            pending = e;
-            if (frame) return;
-            frame = requestAnimationFrame(() => {
-                const rect = heroContent.getBoundingClientRect();
-                const x = pending.clientX - rect.left - rect.width / 2;
-                const y = pending.clientY - rect.top - rect.height / 2;
-                gsap.to('.hero__floating--1', { x: x * 0.02, y: y * 0.02, duration: 0.8, ease: 'power2.out' });
-                gsap.to('.hero__floating--2', { x: x * 0.03, y: y * 0.03, duration: 0.8, ease: 'power2.out' });
-                gsap.to('.hero__floating--3', { x: x * 0.025, y: y * 0.025, duration: 0.8, ease: 'power2.out' });
-                frame = 0;
-            });
-        }, { passive: true });
-        let frame = 0;
-    }
 }
 
 /* ============================================
    7. SCROLLTRIGGER ANIMATIONS
+   Each SECTION rises up from the bottom as one block.
+   Internal elements have subtle stagger within the block.
 ============================================ */
 function initScrollAnimations() {
-    // ==========================================
-    // PREMIUM ANIMATIONS — Reference Video Style
-    // Clip-path mask wipes, text mask reveals,
-    // staggered card entrances, premium easing
-    // ==========================================
 
-    // === SECTION TITLES — Masked text reveal ===
-    document.querySelectorAll('.section-title').forEach(title => {
-        const spans = title.querySelectorAll('span');
-        spans.forEach((span, i) => {
-            // Wrap in mask container if not already
-            gsap.fromTo(span,
-                { yPercent: 120, opacity: 0 },
-                {
-                    yPercent: 0, opacity: 1,
-                    duration: 1.2,
-                    ease: 'power4.out',
-                    delay: i * 0.1,
-                    scrollTrigger: {
-                        trigger: title,
-                        start: 'top 85%',
-                        once: true,
-                    }
-                }
-            );
+    // === JOURNEY SECTION — rises up as one block ===
+    const journeyContainer = document.querySelector('.journey .container');
+    if (journeyContainer) {
+        const tl1 = gsap.timeline({
+            scrollTrigger: { trigger: '.journey', start: 'top 75%', once: true }
         });
-    });
-
-    // === SECTION LABELS — Slide in from left with gold line ===
-    document.querySelectorAll('.section-label').forEach(label => {
-        const line = label.querySelector('.section-label__line');
-        const text = label.querySelector('span:last-child');
-        
-        gsap.fromTo(label,
-            { x: -40, opacity: 0 },
-            {
-                x: 0, opacity: 1,
-                duration: 0.9,
-                ease: 'power4.out',
-                scrollTrigger: { trigger: label, start: 'top 90%', once: true }
-            }
+        tl1.fromTo(journeyContainer,
+            { y: 100, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' }
         );
-        if (line) {
-            gsap.fromTo(line,
-                { scaleX: 0 },
-                {
-                    scaleX: 1,
-                    duration: 0.8,
-                    ease: 'power4.out',
-                    delay: 0.2,
-                    scrollTrigger: { trigger: label, start: 'top 90%', once: true }
-                }
-            );
-        }
-    });
-
-    // === SECTION DESCRIPTIONS — Fade up ===
-    document.querySelectorAll('.section-desc').forEach(desc => {
-        gsap.fromTo(desc,
-            { y: 30, opacity: 0 },
-            {
-                y: 0, opacity: 1,
-                duration: 1,
-                ease: 'power3.out',
-                delay: 0.3,
-                scrollTrigger: { trigger: desc, start: 'top 88%', once: true }
-            }
+        tl1.fromTo('.journey .section-title span',
+            { yPercent: 110 },
+            { yPercent: 0, duration: 1, stagger: 0.1, ease: 'power4.out' },
+            '-=0.6'
         );
-    });
+    }
 
-    // === JOURNEY TIMELINE ===
-    // Progress line fill
+    // Journey progress line
     gsap.to('#journeyProgress', {
         height: '100%',
         ease: 'none',
-        scrollTrigger: {
-            trigger: '.journey__timeline',
-            start: 'top 60%',
-            end: 'bottom 60%',
-            scrub: true,
-        }
+        scrollTrigger: { trigger: '.journey__timeline', start: 'top 60%', end: 'bottom 60%', scrub: true }
     });
 
-    // Journey cards — clip-path wipe reveal
+    // Journey cards — subtle stagger within the block
     document.querySelectorAll('.journey__card').forEach((card, i) => {
         const isRight = card.classList.contains('journey__card--right');
         gsap.fromTo(card,
+            { x: isRight ? 50 : -50, opacity: 0 },
             {
-                x: isRight ? 80 : -80,
-                opacity: 0,
-                clipPath: 'inset(0 0 100% 0 round 16px)',
-            },
-            {
-                x: 0,
-                opacity: 1,
-                clipPath: 'inset(0 0 0% 0 round 16px)',
-                duration: 1.1,
-                ease: 'power4.out',
-                delay: i * 0.05,
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 82%',
-                    once: true,
-                }
+                x: 0, opacity: 1,
+                duration: 0.9, ease: 'power4.out',
+                delay: 0.1 + i * 0.08,
+                scrollTrigger: { trigger: card, start: 'top 85%', once: true }
             }
         );
-
-        // Dot pop
         const dot = card.querySelector('.journey__card-dot');
         if (dot) {
-            gsap.fromTo(dot,
-                { scale: 0 },
-                {
-                    scale: 1,
-                    duration: 0.5,
-                    ease: 'back.out(2)',
-                    delay: 0.4,
-                    scrollTrigger: { trigger: card, start: 'top 80%', once: true }
-                }
-            );
+            gsap.fromTo(dot, { scale: 0 },
+                { scale: 1, duration: 0.4, ease: 'back.out(2)', delay: 0.3,
+                  scrollTrigger: { trigger: card, start: 'top 82%', once: true }
+                });
         }
     });
 
-    // === SERVICES — Clip-path reveal with stagger ===
-    const serviceCards = document.querySelectorAll('.service-card');
-    serviceCards.forEach((card, i) => {
-        gsap.fromTo(card,
-            {
-                y: 80,
-                opacity: 0,
-                clipPath: 'inset(0 0 100% 0 round 12px)',
-            },
-            {
-                y: 0,
-                opacity: 1,
-                clipPath: 'inset(0 0 0% 0 round 12px)',
-                duration: 1,
-                ease: 'power4.out',
-                delay: (i % 3) * 0.12,
-                scrollTrigger: { trigger: card, start: 'top 85%', once: true }
-            }
+    // === SERVICES SECTION — rises up as one block ===
+    const servicesContainer = document.querySelector('.services .container');
+    if (servicesContainer) {
+        const tl2 = gsap.timeline({
+            scrollTrigger: { trigger: '.services', start: 'top 75%', once: true }
+        });
+        tl2.fromTo(servicesContainer,
+            { y: 100, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' }
         );
+        tl2.fromTo('.services .section-title span',
+            { yPercent: 110 },
+            { yPercent: 0, duration: 1, stagger: 0.1, ease: 'power4.out' },
+            '-=0.6'
+        );
+    }
+
+    // Service cards — stagger within the block
+    document.querySelectorAll('.service-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, ease: 'power4.out',
+              delay: 0.15 + (i % 3) * 0.1,
+              scrollTrigger: { trigger: card, start: 'top 88%', once: true }
+            });
     });
 
-    // === PORTFOLIO — Dramatic clip-path reveal ===
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach((card, i) => {
-        gsap.fromTo(card,
-            {
-                y: 100,
-                opacity: 0,
-                clipPath: 'inset(100% 0 0 0 round 16px)',
-            },
-            {
-                y: 0,
-                opacity: 1,
-                clipPath: 'inset(0% 0 0 0 round 16px)',
-                duration: 1.2,
-                ease: 'power4.out',
-                delay: (i % 2) * 0.15,
-                scrollTrigger: { trigger: card, start: 'top 85%', once: true }
-            }
+    // === PORTFOLIO SECTION — rises up as one block ===
+    const portfolioContainer = document.querySelector('.portfolio .container');
+    if (portfolioContainer) {
+        const tl3 = gsap.timeline({
+            scrollTrigger: { trigger: '.portfolio', start: 'top 75%', once: true }
+        });
+        tl3.fromTo(portfolioContainer,
+            { y: 100, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' }
         );
-    });
+        tl3.fromTo('.portfolio .section-title span',
+            { yPercent: 110 },
+            { yPercent: 0, duration: 1, stagger: 0.1, ease: 'power4.out' },
+            '-=0.6'
+        );
+    }
 
     // Portfolio filter buttons
     gsap.fromTo('.portfolio__filter',
-        { y: 20, opacity: 0 },
-        {
-            y: 0, opacity: 1,
-            duration: 0.6,
-            ease: 'power3.out',
-            stagger: 0.08,
-            scrollTrigger: { trigger: '.portfolio__filters', start: 'top 90%', once: true }
-        }
-    );
-
-    // === SKILLS — Slide in with bar fill ===
-    document.querySelectorAll('.skill-bar').forEach((bar, i) => {
-        const fill = bar.querySelector('.skill-bar__fill');
-        const value = fill.dataset.fill;
-        
-        gsap.fromTo(bar,
-            { x: -40, opacity: 0 },
-            {
-                x: 0, opacity: 1,
-                duration: 0.9,
-                ease: 'power4.out',
-                delay: i * 0.08,
-                scrollTrigger: { trigger: bar, start: 'top 88%', once: true }
-            }
-        );
-        
-        gsap.to(fill, {
-            width: value + '%',
-            duration: 1.5,
-            ease: 'power3.out',
-            delay: i * 0.08 + 0.3,
-            scrollTrigger: { trigger: bar, start: 'top 85%', once: true }
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out', stagger: 0.06,
+          scrollTrigger: { trigger: '.portfolio__filters', start: 'top 90%', once: true }
         });
+
+    // Project cards — stagger within the block
+    document.querySelectorAll('.project-card').forEach((card, i) => {
+        gsap.fromTo(card,
+            { y: 60, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.9, ease: 'power4.out',
+              delay: (i % 2) * 0.1,
+              scrollTrigger: { trigger: card, start: 'top 88%', once: true }
+            });
     });
 
-    // === WHY CHOOSE ME — Staggered reveals ===
+    // === SKILLS SECTION — rises up as one block ===
+    const skillsContainer = document.querySelector('.skills .container');
+    if (skillsContainer) {
+        const tl4 = gsap.timeline({
+            scrollTrigger: { trigger: '.skills', start: 'top 75%', once: true }
+        });
+        tl4.fromTo(skillsContainer,
+            { y: 100, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' }
+        );
+        tl4.fromTo('.skills .section-title span',
+            { yPercent: 110 },
+            { yPercent: 0, duration: 1, stagger: 0.1, ease: 'power4.out' },
+            '-=0.6'
+        );
+    }
+
+    // Skill bars — stagger with fill
+    document.querySelectorAll('.skill-bar').forEach((bar, i) => {
+        gsap.fromTo(bar,
+            { x: -30, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.7, ease: 'power4.out',
+              delay: i * 0.06,
+              scrollTrigger: { trigger: bar, start: 'top 90%', once: true }
+            });
+        const fill = bar.querySelector('.skill-bar__fill');
+        if (fill && fill.dataset.fill) {
+            gsap.to(fill, {
+                width: fill.dataset.fill + '%',
+                duration: 1.3, ease: 'power3.out',
+                delay: i * 0.06 + 0.2,
+                scrollTrigger: { trigger: bar, start: 'top 88%', once: true }
+            });
+        }
+    });
+
+    // === WHY SECTION — rises up as one block ===
+    const whyContainer = document.querySelector('.why .container');
+    if (whyContainer) {
+        const tl5 = gsap.timeline({
+            scrollTrigger: { trigger: '.why', start: 'top 75%', once: true }
+        });
+        tl5.fromTo(whyContainer,
+            { y: 100, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' }
+        );
+        tl5.fromTo('.why .section-title span',
+            { yPercent: 110 },
+            { yPercent: 0, duration: 1, stagger: 0.1, ease: 'power4.out' },
+            '-=0.6'
+        );
+    }
+
     document.querySelectorAll('.why__stat').forEach((stat, i) => {
         gsap.fromTo(stat,
-            { y: 50, opacity: 0, clipPath: 'inset(0 0 100% 0 round 12px)' },
-            {
-                y: 0, opacity: 1, clipPath: 'inset(0 0 0% 0 round 12px)',
-                duration: 0.9, ease: 'power4.out',
-                delay: (i % 2) * 0.12,
-                scrollTrigger: { trigger: stat, start: 'top 85%', once: true }
-            }
-        );
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, ease: 'power4.out',
+              delay: (i % 2) * 0.1,
+              scrollTrigger: { trigger: stat, start: 'top 88%', once: true }
+            });
     });
 
     document.querySelectorAll('.why__reason').forEach((reason, i) => {
         gsap.fromTo(reason,
-            { x: 50, opacity: 0 },
-            {
-                x: 0, opacity: 1,
-                duration: 0.9, ease: 'power4.out',
-                delay: i * 0.1,
-                scrollTrigger: { trigger: reason, start: 'top 85%', once: true }
-            }
-        );
+            { x: 40, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.8, ease: 'power4.out',
+              delay: i * 0.08,
+              scrollTrigger: { trigger: reason, start: 'top 88%', once: true }
+            });
     });
 
-    // === CONTACT — Clip-path reveal ===
+    // === CONTACT SECTION — rises up as one block ===
+    const contactContainer = document.querySelector('.contact .container');
+    if (contactContainer) {
+        const tl6 = gsap.timeline({
+            scrollTrigger: { trigger: '.contact', start: 'top 75%', once: true }
+        });
+        tl6.fromTo(contactContainer,
+            { y: 100, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' }
+        );
+        tl6.fromTo('.contact .section-title span',
+            { yPercent: 110 },
+            { yPercent: 0, duration: 1, stagger: 0.1, ease: 'power4.out' },
+            '-=0.6'
+        );
+    }
+
     document.querySelectorAll('.contact-card').forEach((card, i) => {
         gsap.fromTo(card,
-            { y: 60, opacity: 0, clipPath: 'inset(0 0 100% 0 round 12px)' },
-            {
-                y: 0, opacity: 1, clipPath: 'inset(0 0 0% 0 round 12px)',
-                duration: 0.9, ease: 'power4.out',
-                delay: i * 0.1,
-                scrollTrigger: { trigger: card, start: 'top 88%', once: true }
-            }
-        );
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.7, ease: 'power4.out',
+              delay: i * 0.08,
+              scrollTrigger: { trigger: card, start: 'top 90%', once: true }
+            });
     });
 
     // === FOOTER ===
-    gsap.fromTo('.footer__content', {
-        y: 40, opacity: 0
-    }, {
-        y: 0, opacity: 1,
-        duration: 1, ease: 'power3.out',
-        scrollTrigger: { trigger: '.footer__content', start: 'top 90%', once: true }
+    gsap.fromTo('.footer__content',
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: '.footer__content', start: 'top 92%', once: true }
+        });
+
+    // === SECTION LABELS — slide in from left ===
+    document.querySelectorAll('.section-label').forEach(label => {
+        gsap.fromTo(label,
+            { x: -30, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.8, ease: 'power4.out',
+              scrollTrigger: { trigger: label, start: 'top 90%', once: true }
+            });
+        const line = label.querySelector('.section-label__line');
+        if (line) {
+            gsap.fromTo(line,
+                { scaleX: 0 },
+                { scaleX: 1, duration: 0.6, ease: 'power4.out', delay: 0.15,
+                  scrollTrigger: { trigger: label, start: 'top 90%', once: true }
+                });
+        }
+    });
+
+    // === SECTION DESCRIPTIONS ===
+    document.querySelectorAll('.section-desc').forEach(desc => {
+        gsap.fromTo(desc,
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.2,
+              scrollTrigger: { trigger: desc, start: 'top 90%', once: true }
+            });
     });
 }
 
@@ -527,7 +472,7 @@ function initCounters() {
             start: 'top 85%',
             onEnter: () => {
                 let current = 0;
-                const duration = 2000; // ms
+                const duration = 2000;
                 const stepTime = 16;
                 const steps = duration / stepTime;
                 const increment = target / steps;
@@ -557,36 +502,25 @@ function initPortfolioFilter() {
 
     filters.forEach(filter => {
         filter.addEventListener('click', () => {
-            // Update active filter
             filters.forEach(f => f.classList.remove('is-active'));
             filter.classList.add('is-active');
 
             const category = filter.dataset.filter;
 
-            // Filter cards with animation
             cards.forEach(card => {
                 const matches = category === 'all' || card.dataset.category === category;
                 
                 if (matches) {
                     card.classList.remove('is-hidden');
-                    gsap.to(card, {
-                        opacity: 1,
-                        scale: 1,
-                        duration: 0.5,
-                        ease: 'power3.out',
-                    });
+                    gsap.to(card, { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' });
                 } else {
                     gsap.to(card, {
-                        opacity: 0,
-                        scale: 0.9,
-                        duration: 0.4,
-                        ease: 'power3.out',
+                        opacity: 0, scale: 0.9, duration: 0.4, ease: 'power3.out',
                         onComplete: () => card.classList.add('is-hidden'),
                     });
                 }
             });
 
-            // Refresh ScrollTrigger
             setTimeout(() => ScrollTrigger.refresh(), 500);
         });
     });
@@ -597,6 +531,7 @@ function initPortfolioFilter() {
 ============================================ */
 function initMouseParallax() {
     if (window.innerWidth <= 768) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const hero = document.querySelector('.hero');
     if (!hero) return;
@@ -612,7 +547,11 @@ function initMouseParallax() {
     const setters = layers.map(({ el, strength }) => {
         const element = document.querySelector(el);
         if (!element) return null;
-        return { strength, x: gsap.quickTo(element, 'x', { duration: 0.45, ease: 'power2.out' }), y: gsap.quickTo(element, 'y', { duration: 0.45, ease: 'power2.out' }) };
+        return {
+            strength,
+            x: gsap.quickTo(element, 'x', { duration: 0.45, ease: 'power2.out' }),
+            y: gsap.quickTo(element, 'y', { duration: 0.45, ease: 'power2.out' })
+        };
     }).filter(Boolean);
 
     let frame = 0;
@@ -624,15 +563,14 @@ function initMouseParallax() {
             const rect = hero.getBoundingClientRect();
             const x = pending.clientX - rect.left - rect.width / 2;
             const y = pending.clientY - rect.top - rect.height / 2;
-            setters.forEach(({ strength, x: setX, y: setY }) => { setX(x * strength); setY(y * strength); });
+            setters.forEach(({ strength, x: setX, y: setY }) => {
+                setX(x * strength);
+                setY(y * strength);
+            });
             frame = 0;
         });
     }, { passive: true });
 }
-
-
-
-
 
 /* ============================================
    IN-PAGE PROJECT PLAYER
@@ -694,16 +632,15 @@ function initAnimations() {
     initScrollAnimations();
     initCounters();
     initPortfolioFilter();
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) initMouseParallax();
+    initMouseParallax();
     initProjectPlayer();
     
-    // Refresh ScrollTrigger after everything loads
     window.addEventListener('load', () => {
         ScrollTrigger.refresh();
     });
 }
 
-// If preloader is skipped (slow CDN), init after 3s max
+// If preloader is skipped (slow CDN), init after 4s max
 setTimeout(() => {
     if (!document.querySelector('.loader.is-hidden') && !document.querySelector('.loader.is-loaded')) {
         loader.classList.add('is-loaded');
