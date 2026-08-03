@@ -629,16 +629,17 @@ function initReelPlayer() {
     const player = document.getElementById('reelPlayer');
     if (!player) return;
 
-    player.addEventListener('click', (e) => {
-        // Visual feedback — could open a modal or redirect
-        gsap.to('.reel__play-btn', {
-            scale: 0.9,
-            duration: 0.15,
-            yoyo: true,
-            repeat: 1,
-            ease: 'power2.inOut',
+    const video = document.getElementById('showreelVideo');
+    const playButton = player.querySelector('.reel__play-btn');
+    if (video && playButton) {
+        playButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (video.paused) video.play().catch(() => {});
+            else video.pause();
         });
-    });
+        video.addEventListener('play', () => player.classList.add('is-playing'));
+        video.addEventListener('pause', () => player.classList.remove('is-playing'));
+    }
 }
 
 
