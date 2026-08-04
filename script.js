@@ -298,29 +298,6 @@ function initScrollAnimations() {
         });
     });
 
-    // === REEL ===
-    gsap.from('.reel__player', {
-        scale: 0.95,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-            trigger: '.reel',
-            start: 'top 70%',
-        }
-    });
-
-    // Reel play button scale on scroll
-    gsap.from('.reel__play-btn', {
-        scale: 0,
-        duration: 0.8,
-        ease: 'back.out(1.7)',
-        scrollTrigger: {
-            trigger: '.reel__player',
-            start: 'top 75%',
-        }
-    });
-
     // === JOURNEY TIMELINE ===
     // Progress line fill
     gsap.to('#journeyProgress', {
@@ -625,19 +602,7 @@ function initMouseParallax() {
 /* ============================================
    12. REEL PLAYER INTERACTION
 ============================================ */
-function initReelPlayer() {
-    const player = document.getElementById('reelPlayer');
-    if (!player) return;
-
-    player.addEventListener('click', (e) => {
-        // Visual feedback — could open a modal or redirect
-        gsap.to('.reel__play-btn', {
-            scale: 0.9,
-            duration: 0.15,
-            yoyo: true,
-            repeat: 1,
-            ease: 'power2.inOut',
-        });
+);
     });
 }
 
@@ -702,7 +667,6 @@ function initAnimations() {
     initCounters();
     initPortfolioFilter();
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) initMouseParallax();
-    initReelPlayer();
     initProjectPlayer();
     
     // Refresh ScrollTrigger after everything loads
