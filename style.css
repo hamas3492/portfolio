@@ -350,6 +350,8 @@ ul {
     flex-direction: column;
     line-height: 1.1;
     text-decoration: none;
+    flex-shrink: 0;
+    max-width: 55vw;
 }
 
 .nav__logo-mark {
@@ -357,17 +359,19 @@ ul {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 1.2rem;
+    font-size: clamp(0.85rem, 3.2vw, 1.2rem);
+    white-space: nowrap;
 }
 
 .nav__logo-sub {
     font-family: var(--font-body);
-    font-size: 0.65rem;
+    font-size: clamp(0.5rem, 1.6vw, 0.65rem);
     font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.45);
     margin-top: 2px;
+    white-space: nowrap;
 }
 
 .nav__links {
@@ -1931,8 +1935,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 @media (max-width: 600px) {
-    .nav__logo-mark { font-size: 1rem; }
-    .nav__logo-sub { font-size: 0.55rem; }
     .portfolio__grid, .services__grid, .contact__cards { grid-template-columns: 1fr; }
     .hero__title { font-size: clamp(3.2rem, 16vw, 5.5rem); }
     .hero__desc, .section-desc { max-width: 100%; }
