@@ -185,13 +185,6 @@ ul {
     gap: 4px;
 }
 
-/* Mask reveal support for section titles */
-.section-title span {
-    display: block;
-    overflow: hidden;
-    padding-bottom: 0.08em;
-}
-
 .section-desc {
     font-size: clamp(1rem, 1.5vw, 1.15rem);
     color: var(--text-muted);
@@ -343,15 +336,10 @@ ul {
 
 .nav__logo {
     font-family: var(--font-head);
+    font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -0.02em;
     z-index: 1001;
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-    text-decoration: none;
-    flex-shrink: 0;
-    max-width: 55vw;
 }
 
 .nav__logo-mark {
@@ -359,19 +347,6 @@ ul {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: clamp(0.85rem, 3.2vw, 1.2rem);
-    white-space: nowrap;
-}
-
-.nav__logo-sub {
-    font-family: var(--font-body);
-    font-size: clamp(0.5rem, 1.6vw, 0.65rem);
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.45);
-    margin-top: 2px;
-    white-space: nowrap;
 }
 
 .nav__links {
@@ -584,13 +559,12 @@ ul {
 
 .hero__name-line {
     display: block;
-    padding-bottom: 0.12em;
-    line-height: 1.1;
     overflow: hidden;
 }
 
 .hero__name {
     display: block;
+    transform: translateY(100%);
     will-change: transform;
 }
 
@@ -603,7 +577,6 @@ ul {
 
 .hero__subtitle {
     margin-bottom: 28px;
-    padding-bottom: 0.1em;
     overflow: hidden;
 }
 
@@ -614,7 +587,9 @@ ul {
     font-weight: 400;
     color: var(--gold);
     letter-spacing: 0.05em;
+    transform: translateY(100%);
     will-change: transform;
+}
 
 .hero__desc {
     font-size: 1.05rem;
@@ -623,14 +598,14 @@ ul {
     margin-bottom: 40px;
     max-width: 480px;
     line-height: 1.7;
-    opacity: 1;
+    opacity: 0;
 }
 
 .hero__actions {
     display: flex;
     gap: 16px;
     margin-bottom: 60px;
-    opacity: 1;
+    opacity: 0;
 }
 
 /* Buttons */
@@ -684,7 +659,7 @@ ul {
 .hero__stats {
     display: flex;
     gap: 48px;
-    opacity: 1;
+    opacity: 0;
 }
 
 .hero__stat {
@@ -1985,183 +1960,4 @@ button, a { -webkit-tap-highlight-color: transparent; }
     .project-player__dialog { max-height: 88vh; }
     .project-player__media { aspect-ratio: 9 / 16; max-height: 62vh; }
     .project-player__caption h2 { font-size: 1.15rem; }
-}
-
-/* Android project-card layout: keep the complete card content inside the touch target. */
-@media (max-width: 768px) {
-    .project-card {
-        height: 320px;
-        min-height: 320px;
-        aspect-ratio: auto;
-    }
-
-    .project-card__image {
-        height: 100%;
-    }
-
-    .project-card__content {
-        padding: 14px 16px 16px;
-    }
-
-    .project-card__category {
-        margin-bottom: 8px;
-        padding: 3px 10px;
-        font-size: .58rem;
-        letter-spacing: .1em;
-    }
-
-    .project-card__title {
-        margin-bottom: 8px;
-        font-size: clamp(1.05rem, 5vw, 1.4rem);
-        line-height: 1.15;
-    }
-
-    .project-card__desc {
-        margin-bottom: 12px;
-        font-size: .75rem;
-        line-height: 1.35;
-        -webkit-line-clamp: 2;
-    }
-
-    .project-card__play {
-        min-height: 40px;
-        white-space: nowrap;
-        appearance: none;
-        -webkit-appearance: none;
-    }
-}
-
-@media (max-width: 390px) {
-    .project-card {
-        height: 300px;
-        min-height: 300px;
-    }
-}
-
-
-/* Keep hero copy inside the viewport on narrow Android screens. */
-@media (max-width: 768px) {
-    .hero { width: 100%; max-width: 100vw; overflow: hidden; }
-    .hero__content { width: 100%; max-width: 100%; min-width: 0; padding-inline: 0; }
-    .hero__title { width: 100%; max-width: 100%; font-size: clamp(2.55rem, 13vw, 4.5rem); line-height: .98; letter-spacing: -.045em; overflow-wrap: anywhere; word-break: normal; }
-    .hero__name-line { max-width: 100%; overflow: hidden; }
-    .hero__name { max-width: 100%; }
-    .hero__desc { width: 100%; max-width: 100%; padding-inline: 4px; font-size: .98rem; line-height: 1.6; overflow-wrap: break-word; }
-    .hero__subtitle-text { font-size: clamp(1rem, 4.5vw, 1.3rem); }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ============================================
-   REFERENCE-STYLE ANIMATION SUPPORT
-   Pure CSS helpers for GSAP-driven animations
-============================================ */
-
-/* Mask containers for text reveal — GSAP animates the inner element */
-.mask-reveal {
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: bottom;
-    padding-bottom: 0.08em;
-}
-
-/* Section clip-path container — GSAP animates clip-path */
-.clip-container {
-    overflow: hidden;
-}
-
-/* Card entrance containers — GSAP handles the transform */
-.card-enter {
-    will-change: transform, opacity;
-}
-
-/* Premium hover for project cards */
-.project-card {
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
-}
-.project-card:hover {
-    transform: translateY(-8px);
-}
-
-/* Gold sweep on project images */
-.project-card__image {
-    position: relative;
-    overflow: hidden;
-}
-.project-card__image::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(120deg, transparent 30%, rgba(224, 183, 58, 0.12) 50%, transparent 70%);
-    transform: translateX(-100%);
-    transition: transform 0.8s ease;
-    pointer-events: none;
-    z-index: 3;
-}
-.project-card:hover .project-card__image::after {
-    transform: translateX(100%);
-}
-
-/* Service card premium hover */
-.service-card {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-}
-.service-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
-
-/* Contact card premium hover */
-.contact-card {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
-}
-.contact-card:hover {
-    transform: translateY(-4px);
-}
-
-/* Journey card premium hover */
-.journey__card {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-}
-.journey__card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .project-card, .service-card, .contact-card, .journey__card {
-        transition: none !important;
-    }
-    .project-card__image::after { display: none; }
-}
-
-/* ============================================
-   FALLBACK: Elements visible by default
-   GSAP with immediateRender:false will NOT hide
-   these until the scroll trigger fires.
-   This ensures cards are never stuck invisible.
-============================================ */
-.project-card,
-.service-card,
-.journey__card,
-.skill-bar,
-.why__stat,
-.why__reason,
-.contact-card,
-.footer__content,
-.section-label,
-.section-desc {
-    opacity: 1;
 }
