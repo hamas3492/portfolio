@@ -449,33 +449,45 @@ function initScrollAnimations() {
 }
 function initCounters() {
     const counters = document.querySelectorAll('[data-count]');
-    
+
     counters.forEach(counter => {
         const target = parseInt(counter.dataset.count);
-        
-        ScrollTrigger.create({
+        let hasRun = false;
+
+        const runCount = () => {
+            if (hasRun) return;
+            hasRun = true;
+            let current = 0;
+            const duration = 2000;
+            const stepTime = 16;
+            const steps = duration / stepTime;
+            const increment = target / steps;
+
+            const update = () => {
+                current += increment;
+                if (current < target) {
+                    counter.textContent = Math.floor(current);
+                    requestAnimationFrame(update);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+            update();
+        };
+
+        const st = ScrollTrigger.create({
             trigger: counter,
             start: 'top 85%',
-            onEnter: () => {
-                let current = 0;
-                const duration = 2000;
-                const stepTime = 16;
-                const steps = duration / stepTime;
-                const increment = target / steps;
-                
-                const update = () => {
-                    current += increment;
-                    if (current < target) {
-                        counter.textContent = Math.floor(current);
-                        requestAnimationFrame(update);
-                    } else {
-                        counter.textContent = target;
-                    }
-                };
-                update();
-            },
+            onEnter: runCount,
             once: true,
         });
+
+        // Elements already in view when the page loads (e.g. hero stats above
+        // the fold) never cross the "start" boundary via scrolling, so
+        // onEnter would otherwise never fire. Run immediately in that case.
+        if (st.isActive) {
+            runCount();
+        }
     });
 }
 
