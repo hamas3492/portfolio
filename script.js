@@ -1,29 +1,44 @@
-/* ===== HAMAS AHMED — PORTFOLIO JS ===== */
+/* ===== HAMAS AHMED — EDITING TIMELINE PORTFOLIO JS ===== */
 
-// Loader
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        const loader = document.getElementById('loader');
-        if (loader) loader.classList.add('hide');
-        // Animate hero
-        if (window.gsap) {
-            gsap.from('.hero__tag', { y: 20, opacity: 0, duration: 0.8, delay: 0.2, ease: 'power3.out' });
-            gsap.from('.hero__title .line', { y: 100, opacity: 0, duration: 1, stagger: 0.1, delay: 0.3, ease: 'power4.out' });
-            gsap.from('.hero__sub', { y: 20, opacity: 0, duration: 0.8, delay: 0.8, ease: 'power3.out' });
-            gsap.from('.hero__btns .btn', { y: 20, opacity: 0, duration: 0.6, stagger: 0.1, delay: 1, ease: 'power3.out' });
-            gsap.from('.hero__photo', { x: 40, opacity: 0, duration: 1, delay: 0.5, ease: 'power3.out' });
-        }
-    }, 1800);
-});
+// ===== LOADER =====
+const loaderFill = document.getElementById('loaderFill');
+const loaderPct = document.getElementById('loaderPct');
+let loadProgress = 0;
 
-// Nav scroll
+const loadTimer = setInterval(() => {
+    loadProgress += Math.random() * 12;
+    if (loadProgress >= 100) {
+        loadProgress = 100;
+        clearInterval(loadTimer);
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('hide');
+            animateHero();
+        }, 400);
+    }
+    if (loaderFill) loaderFill.style.width = loadProgress + '%';
+    if (loaderPct) loaderPct.textContent = Math.floor(loadProgress) + '%';
+}, 120);
+
+// ===== HERO ANIMATION =====
+function animateHero() {
+    if (!window.gsap) return;
+    gsap.from('.hero__slate', { y: 20, opacity: 0, duration: 0.8, delay: 0.1, ease: 'power3.out' });
+    gsap.from('.hero__title .reveal', { y: 100, opacity: 0, duration: 1, stagger: 0.1, delay: 0.2, ease: 'power4.out' });
+    gsap.from('.hero__sub', { y: 20, opacity: 0, duration: 0.8, delay: 0.7, ease: 'power3.out' });
+    gsap.from('.hero__btns .btn', { y: 20, opacity: 0, duration: 0.6, stagger: 0.1, delay: 0.9, ease: 'power3.out' });
+    gsap.from('.hero__photo', { x: 40, opacity: 0, duration: 1, delay: 0.3, ease: 'power3.out' });
+    gsap.from('.hero__photo-tag', { scale: 0, opacity: 0, duration: 0.5, delay: 1.2, ease: 'back.out(1.7)' });
+    gsap.from('.hero__corner-bl, .hero__corner-br', { opacity: 0, duration: 0.8, delay: 1.4, ease: 'power3.out' });
+}
+
+// ===== NAV SCROLL =====
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 40) nav.classList.add('scrolled');
     else nav.classList.remove('scrolled');
 });
 
-// Mobile menu
+// ===== MOBILE MENU =====
 const burger = document.getElementById('burger');
 const mobileMenu = document.getElementById('mobileMenu');
 if (burger) {
@@ -39,36 +54,62 @@ document.querySelectorAll('[data-nav]').forEach(a => {
     });
 });
 
-// ScrollTrigger animations
+// ===== TIMECODE DISPLAY =====
+const timecodeEl = document.getElementById('timecode');
+const renderFill = document.getElementById('renderFill');
+const totalDuration = 272; // 4:32 in seconds
+
+function formatTC(seconds) {
+    const hh = 0;
+    const mm = Math.floor(seconds / 60);
+    const ss = Math.floor(seconds % 60);
+    const ff = Math.floor((seconds % 1) * 24);
+    return `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}:${String(ff).padStart(2,'0')}`;
+}
+
+window.addEventListener('scroll', () => {
+    const scrollProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    const currentSec = scrollProgress * totalDuration;
+    if (timecodeEl) timecodeEl.textContent = formatTC(currentSec);
+    if (renderFill) renderFill.style.width = (scrollProgress * 100) + '%';
+}, { passive: true });
+
+// ===== SCROLLTRIGGER ANIMATIONS =====
 if (window.gsap && window.ScrollTrigger) {
     gsap.registerPlugin(ScrollTrigger);
     
-    // Section headers
-    gsap.utils.toArray('.section-head').forEach(head => {
+    // Track headers
+    gsap.utils.toArray('.track-header').forEach(head => {
         gsap.from(head, {
             y: 40, opacity: 0, duration: 0.8, ease: 'power3.out',
             scrollTrigger: { trigger: head, start: 'top 85%' }
         });
     });
     
-    // Work cards
-    gsap.utils.toArray('.work-card').forEach((card, i) => {
-        gsap.from(card, {
-            y: 60, opacity: 0, duration: 0.8, delay: i * 0.1, ease: 'power3.out',
-            scrollTrigger: { trigger: card, start: 'top 85%' }
+    // Clips
+    gsap.utils.toArray('.clip').forEach((clip, i) => {
+        gsap.from(clip, {
+            x: -60, opacity: 0, duration: 0.8, delay: i * 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: clip, start: 'top 85%' }
         });
     });
     
     // About text
-    gsap.from('.about__text p', {
+    gsap.from('.about__left p', {
         y: 30, opacity: 0, duration: 0.6, stagger: 0.15, ease: 'power3.out',
-        scrollTrigger: { trigger: '.about__text', start: 'top 80%' }
+        scrollTrigger: { trigger: '.about__left', start: 'top 80%' }
     });
     
     // Stats
     gsap.from('.stat', {
         y: 40, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
-        scrollTrigger: { trigger: '.about__stats', start: 'top 80%' }
+        scrollTrigger: { trigger: '.about__right', start: 'top 80%' }
+    });
+    
+    // Gear cards
+    gsap.from('.gear-card', {
+        y: 50, opacity: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.gear__grid', start: 'top 80%' }
     });
     
     // Contact
@@ -78,13 +119,13 @@ if (window.gsap && window.ScrollTrigger) {
     });
     
     // Footer
-    gsap.from('.footer p', {
-        opacity: 0, duration: 1,
+    gsap.from('.footer__left, .footer__right', {
+        y: 20, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
         scrollTrigger: { trigger: '.footer', start: 'top 95%' }
     });
 }
 
-// Counter animation
+// ===== COUNTER ANIMATION =====
 const counters = document.querySelectorAll('[data-count]');
 const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -95,10 +136,7 @@ const counterObserver = new IntersectionObserver((entries) => {
             const increment = Math.max(1, Math.floor(target / 30));
             const timer = setInterval(() => {
                 current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
+                if (current >= target) { current = target; clearInterval(timer); }
                 el.textContent = current;
             }, 40);
             counterObserver.unobserve(el);
@@ -107,14 +145,14 @@ const counterObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 counters.forEach(c => counterObserver.observe(c));
 
-// Video modal
+// ===== VIDEO MODAL =====
 const modal = document.getElementById('videoModal');
 const modalPlayer = document.getElementById('modalPlayer');
 const modalTitle = document.getElementById('modalTitle');
 const modalBg = document.getElementById('modalBg');
 const modalClose = document.getElementById('modalClose');
 
-document.querySelectorAll('.work-card').forEach(card => {
+document.querySelectorAll('.clip').forEach(card => {
     card.addEventListener('click', () => {
         const videoId = card.dataset.projectVideo;
         const title = card.dataset.projectTitle;
