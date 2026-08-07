@@ -2,388 +2,219 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta name="description" content="Hamas Ahmed — Creative Video Editor based in Thatta, Pakistan. Lyrics videos, fan edits, and emotional cuts crafted with CapCut and Premiere Pro.">
-    <meta name="keywords" content="Hamas Ahmed, Video Editor, Creative Editor, Pakistan, Thatta, Cinematic Editing, Lyrics Videos">
-    <meta name="author" content="Hamas Ahmed">
-    
-    <!-- Open Graph -->
+    <title>Hamas Ahmed — Creative Video Editor</title>
+    <meta name="description" content="Hamas Ahmed is a creative video editor from Thatta, Pakistan. Cinematic edits, emotional storytelling, and visual artistry.">
+    <meta name="keywords" content="Hamas Ahmed, video editor, creative editor, Thatta, Pakistan, cinematic editing">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Hamas Ahmed — Creative Video Editor">
-    <meta property="og:description" content="Creative Video Editor from Thatta, Pakistan. Lyrics videos, fan edits, and emotional cuts.">
+    <meta property="og:description" content="Cinematic edits, emotional storytelling, and visual artistry.">
     <meta property="og:image" content="https://hamas3492.github.io/portfolio/assets/hero.jpg">
-    <meta property="og:url" content="https://hamas3492.github.io/portfolio/">
-    <link rel="canonical" href="https://hamas3492.github.io/portfolio/">
-    
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Hamas Ahmed — Creative Video Editor">
     <meta name="twitter:image" content="https://hamas3492.github.io/portfolio/assets/hero.jpg">
-    
-    <title>Hamas Ahmed — Creative Video Editor</title>
-    
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='sans-serif' font-weight='bold' fill='%237c3aed'>H</text></svg>">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0a14'/><text x='50' y='68' font-family='Arial' font-size='52' font-weight='bold' fill='%237c3aed' text-anchor='middle'>H</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <link rel="stylesheet" href="style.css?v=1786106785">
-    
+    <link rel="stylesheet" href="style.css?v=1786107032">
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
       "@type": "Person",
       "name": "Hamas Ahmed",
       "jobTitle": "Creative Video Editor",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Thatta",
-        "addressRegion": "Sindh",
-        "addressCountry": "Pakistan"
-      },
+      "address": "Thatta, Sindh, Pakistan",
       "email": "hamasahmed155@gmail.com",
-      "url": "https://hamas3492.github.io/portfolio/",
-      "image": "https://hamas3492.github.io/portfolio/assets/hero.jpg",
-      "sameAs": [
-        "https://www.youtube.com/@xtremelyrics0",
-        "https://www.tiktok.com/@xtremelyrics"
-      ]
+      "sameAs": ["https://www.youtube.com/@xtremelyrics0","https://www.tiktok.com/@xtremelyrics"]
     }
     </script>
-
     <script>
-    // Force fresh load - clear old cached versions
-    (function() {
-        var links = document.querySelectorAll('link[rel="stylesheet"]');
-        links.forEach(function(l) { if(l.href.indexOf('style.css') > -1) l.href = l.href.split('?')[0] + '?v=' + Date.now(); });
-        var scripts = document.querySelectorAll('script[src]');
-        scripts.forEach(function(s) { if(s.src.indexOf('script.js') > -1) s.src = s.src.split('?')[0] + '?v=' + Date.now(); });
+    (function(){
+        var l=document.querySelectorAll('link[rel="stylesheet"]');
+        l.forEach(function(s){if(s.href.indexOf('style.css')>-1)s.href=s.href.split('?')[0]+'?v='+Date.now();});
     })();
     </script>
 </head>
 <body>
 
-    <!-- ============ LOADER ============ -->
-    <div class="loader" id="loader">
-        <div class="loader__bg-text">
-            <span>CREATIVE EDITOR • A CREATIVE EDITOR • A CREATIVE EDITOR</span>
-        </div>
-        <div class="loader__pill">
-            <span class="loader__pill-label">LOADING</span>
-            <div class="loader__pill-right">
-                <span class="loader__pill-percent" id="loaderPercent">0%</span>
-                <div class="loader__pill-bar">
-                    <div class="loader__pill-fill" id="loaderFill"></div>
-                </div>
-            </div>
-        </div>
-        <div class="loader__brand">Hamas<span> Ahmed</span></div>
+<!-- Loader -->
+<div class="loader" id="loader">
+    <div class="loader__text">Hamas Ahmed</div>
+    <div class="loader__bar"><div class="loader__fill"></div></div>
+</div>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+    <a href="#" class="nav__logo">Hamas<span>.</span></a>
+    <div class="nav__links">
+        <a href="#work" data-nav>Work</a>
+        <a href="#about" data-nav>About</a>
+        <a href="#contact" data-nav>Contact</a>
     </div>
+    <a href="#contact" class="nav__cta">Let's Talk</a>
+    <button class="nav__burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+</nav>
 
-    <!-- ============ NAV ============ -->
-    <nav class="nav" id="nav">
-        <a href="#hero" class="nav__brand">Hamas<span> Ahmed</span></a>
-        <div class="nav__center">
-            <a href="mailto:hamasahmed155@gmail.com" class="nav__email">hamasahmed155@gmail.com</a>
-        </div>
-        <div class="nav__links">
-            <a href="#about" class="nav__link">ABOUT</a>
-            <a href="#work" class="nav__link">WORK</a>
-            <a href="#contact" class="nav__link">CONTACT</a>
-        </div>
-        <button class="nav__burger" id="burger" aria-label="Menu">
-            <span></span>
-            <span></span>
-        </button>
-    </nav>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#work" data-nav>Work</a>
+    <a href="#about" data-nav>About</a>
+    <a href="#contact" data-nav>Contact</a>
+    <a href="#contact" class="nav__cta">Let's Talk</a>
+</div>
 
-    <!-- ============ MOBILE MENU ============ -->
-    <div class="mobile-menu" id="mobileMenu">
-        <button class="mobile-menu__close" id="menuClose" aria-label="Close menu">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="mobile-menu__links">
-            <a href="#about" class="mobile-menu__link">ABOUT</a>
-            <a href="#work" class="mobile-menu__link">WORK</a>
-            <a href="#contact" class="mobile-menu__link">CONTACT</a>
-        </div>
-        <div class="mobile-menu__social">
-            <a href="https://www.youtube.com/@xtremelyrics0" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.tiktok.com/@xtremelyrics" target="_blank"><i class="fab fa-tiktok"></i></a>
-            <a href="mailto:hamasahmed155@gmail.com"><i class="fas fa-envelope"></i></a>
+<!-- Hero -->
+<section class="hero" id="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__content">
+        <div class="hero__tag">Creative Video Editor</div>
+        <h1 class="hero__title">
+            <span class="line">I edit</span>
+            <span class="line accent">stories</span>
+            <span class="line">that move</span>
+            <span class="line accent2">people.</span>
+        </h1>
+        <p class="hero__sub">Cinematic edits · Emotional storytelling · Visual artistry</p>
+        <div class="hero__btns">
+            <a href="#work" class="btn btn-primary">View Work <i class="fas fa-arrow-down"></i></a>
+            <a href="#contact" class="btn btn-ghost">Get in Touch</a>
         </div>
     </div>
-
-    <!-- ============ SOCIAL SIDEBAR ============ -->
-    <div class="social-sidebar">
-        <a href="https://www.youtube.com/@xtremelyrics0" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-        <a href="https://www.tiktok.com/@xtremelyrics" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-        <a href="https://wa.me/923063632210" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="mailto:hamasahmed155@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        <div class="social-sidebar__line"></div>
+    <div class="hero__photo">
+        <div class="hero__photo-glow"></div>
+        <img src="assets/hero.jpg" alt="Hamas Ahmed" class="hero__photo-img" loading="eager">
     </div>
+    <div class="hero__scroll">
+        <span>Scroll</span>
+        <div class="hero__scroll-line"></div>
+    </div>
+</section>
 
-    <!-- ============ HERO ============ -->
-    <section class="hero" id="hero">
-        <div class="hero__glow"></div>
-        
-        <div class="hero__left">
-            <p class="hero__greet">Hello! I'm</p>
-            <h1 class="hero__name">
-                <span class="hero__name-line">HAMAS</span>
-                <span class="hero__name-line hero__name-line--accent">AHMED</span>
-            </h1>
+<!-- Marquee -->
+<div class="marquee">
+    <div class="marquee__track">
+        <span>Premiere Pro</span><i class="fas fa-star"></i>
+        <span>After Effects</span><i class="fas fa-star"></i>
+        <span>DaVinci Resolve</span><i class="fas fa-star"></i>
+        <span>Audition</span><i class="fas fa-star"></i>
+        <span>Cinematic</span><i class="fas fa-star"></i>
+        <span>Storytelling</span><i class="fas fa-star"></i>
+        <span>Premiere Pro</span><i class="fas fa-star"></i>
+        <span>After Effects</span><i class="fas fa-star"></i>
+        <span>DaVinci Resolve</span><i class="fas fa-star"></i>
+        <span>Audition</span><i class="fas fa-star"></i>
+        <span>Cinematic</span><i class="fas fa-star"></i>
+        <span>Storytelling</span><i class="fas fa-star"></i>
+    </div>
+</div>
+
+<!-- Work -->
+<section class="work" id="work">
+    <div class="container">
+        <div class="section-head">
+            <div class="section-num">01</div>
+            <h2>Selected Work</h2>
         </div>
-
-        <div class="hero__avatar">
-            <div class="hero__avatar-glow"></div>
-            <div class="hero__avatar-frame">
-                <img src="assets/hero.jpg" alt="Hamas Ahmed — Creative Video Editor" class="hero__avatar-img" loading="eager" fetchpriority="high">
-                <div class="hero__avatar-overlay"></div>
-            </div>
-            <div class="hero__badge hero__badge--1">
-                <i class="fas fa-play"></i>
-            </div>
-            <div class="hero__badge hero__badge--2">
-                <i class="fas fa-scissors"></i>
-            </div>
-        </div>
-
-        <div class="hero__right">
-            <p class="hero__greet">A Creative</p>
-            <h2 class="hero__role">
-                <span class="hero__role-faded">DESIGNER</span>
-                <span class="hero__role-main">VIDEO EDITOR</span>
-            </h2>
-        </div>
-
-        <div class="hero__scroll">
-            <span>SCROLL</span>
-            <div class="hero__scroll-line"></div>
-        </div>
-    </section>
-
-    <!-- ============ ABOUT / JOURNEY ============ -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-num">01</span>
-                <h2 class="section-title">My Journey</h2>
-            </div>
-            <div class="about__subtitle">
-                <p>Self-taught video editor from Thatta, Pakistan. Every frame is a learning step, every project is made with heart.</p>
-            </div>
-            
-            <div class="timeline">
-                <div class="timeline__item">
-                    <div class="timeline__year">2023</div>
-                    <div class="timeline__content">
-                        <h3 class="timeline__title">Started Editing</h3>
-                        <p class="timeline__company">Self-Taught</p>
-                        <p class="timeline__desc">Discovered the world of video editing through CapCut. Started making lyrics videos and emotional fan edits as a hobby.</p>
-                    </div>
+        <div class="work__grid">
+            <div class="work-card" data-project-video="7596779781211884807" data-project-title="Arz Kiya Hai — Max & Lucas Edit">
+                <div class="work-card__img"><img src="assets/project-thumbs/arz-kiya-hai.jpg" alt="Arz Kiya Hai" loading="lazy"></div>
+                <div class="work-card__overlay">
+                    <div class="work-card__num">01</div>
+                    <div class="work-card__play"><i class="fas fa-play"></i></div>
                 </div>
-                <div class="timeline__item">
-                    <div class="timeline__year">2024</div>
-                    <div class="timeline__content">
-                        <h3 class="timeline__title">Growing & Learning</h3>
-                        <p class="timeline__company">Freelance</p>
-                        <p class="timeline__desc">Expanded to Premiere Pro, learned color grading, motion graphics, and storytelling. Started building a presence on YouTube and TikTok.</p>
-                    </div>
-                </div>
-                <div class="timeline__item">
-                    <div class="timeline__year">NOW</div>
-                    <div class="timeline__content">
-                        <h3 class="timeline__title">Creative Editor</h3>
-                        <p class="timeline__company">Available for Projects</p>
-                        <p class="timeline__desc">80+ videos made, 79K+ best video views. Turning songs into visual stories — lyrics videos, fan edits, and cinematic cuts crafted with passion.</p>
-                    </div>
+                <div class="work-card__info">
+                    <h3>Arz Kiya Hai</h3>
+                    <p>Max & Lucas · Stranger Things Edit</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ============ WORK ============ -->
-    <section class="work" id="work">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-num">02</span>
-                <h2 class="section-title">My Work</h2>
-            </div>
-            <div class="about__subtitle">
-                <p>A selection of my recent video edits — crafted with emotion, rhythm, and story.</p>
-            </div>
-
-            <div class="work__list">
-                <div class="work__item" data-project="0">
-                    <div class="work__num">01</div>
-                    <div class="work__details">
-                        <h3 class="work__title">Arz Kiya Hai — Max & Lucas Edit</h3>
-                        <p class="work__cat">Music Video</p>
-                        <p class="work__tools">CapCut, Premiere Pro, Emotional Edit</p>
-                    </div>
-                    <div class="work__thumb">
-                        <img src="assets/project-thumbs/extraordinary-child.jpg" alt="Arz Kiya Hai edit thumbnail" loading="lazy">
-                        <button class="work__play project-card__play" 
-                            data-project-video="7596779781211884807" 
-                            data-project-title="Arz Kiya Hai — Max & Lucas Edit" 
-                            data-project-poster="assets/project-thumbs/extraordinary-child.jpg">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
+            <div class="work-card" data-project-video="7554273306086558983" data-project-title="Extraordinary Child — Emotional Edit">
+                <div class="work-card__img"><img src="assets/project-thumbs/extraordinary-child.jpg" alt="Extraordinary Child" loading="lazy"></div>
+                <div class="work-card__overlay">
+                    <div class="work-card__num">02</div>
+                    <div class="work-card__play"><i class="fas fa-play"></i></div>
                 </div>
-
-                <div class="work__item" data-project="1">
-                    <div class="work__num">02</div>
-                    <div class="work__details">
-                        <h3 class="work__title">Extraordinary Child — Emotional Edit</h3>
-                        <p class="work__cat">Lyrics Video</p>
-                        <p class="work__tools">CapCut, Premiere Pro, Cinematic Cut</p>
-                    </div>
-                    <div class="work__thumb">
-                        <img src="assets/project-thumbs/arz-kiya-hai.jpg" alt="Extraordinary Child thumbnail" loading="lazy">
-                        <button class="work__play project-card__play"
-                            data-project-video="7554273306086558983"
-                            data-project-title="Extraordinary Child — Emotional Edit"
-                            data-project-poster="assets/project-thumbs/arz-kiya-hai.jpg">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="work__item" data-project="2">
-                    <div class="work__num">03</div>
-                    <div class="work__details">
-                        <h3 class="work__title">Tum Kya Gaye — Urdu Edit</h3>
-                        <p class="work__cat">Cinematic Edit</p>
-                        <p class="work__tools">CapCut, Premiere Pro, Urdu Lyrics</p>
-                    </div>
-                    <div class="work__thumb">
-                        <img src="assets/project-thumbs/urdu-edit.jpg" alt="Tum Kya Gaye thumbnail" loading="lazy">
-                        <button class="work__play project-card__play"
-                            data-project-video="7664542258032626964"
-                            data-project-title="Tum Kya Gaye — Urdu Edit"
-                            data-project-poster="assets/project-thumbs/urdu-edit.jpg">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
+                <div class="work-card__info">
+                    <h3>Extraordinary Child</h3>
+                    <p>Emotional · Cinematic Edit</p>
                 </div>
             </div>
-
-            <div class="work__cta">
-                <a href="#contact" class="btn-cta">
-                    <span>Start Your Project</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============ TECH STACK ============ -->
-    <section class="stack" id="stack">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-num">03</span>
-                <h2 class="section-title">My Arsenal</h2>
-            </div>
-            <div class="stack__grid">
-                <div class="stack__item">
-                    <div class="stack__icon"><i class="fas fa-video"></i></div>
-                    <h3>CapCut</h3>
-                    <p>Mobile & Desktop Editing</p>
+            <div class="work-card" data-project-video="7664542258032626964" data-project-title="Tum Kya Gaye — Urdu Edit">
+                <div class="work-card__img"><img src="assets/project-thumbs/urdu-edit.jpg" alt="Tum Kya Gaye" loading="lazy"></div>
+                <div class="work-card__overlay">
+                    <div class="work-card__num">03</div>
+                    <div class="work-card__play"><i class="fas fa-play"></i></div>
                 </div>
-                <div class="stack__item">
-                    <div class="stack__icon"><i class="fas fa-film"></i></div>
-                    <h3>Premiere Pro</h3>
-                    <p>Professional Editing Suite</p>
+                <div class="work-card__info">
+                    <h3>Tum Kya Gaye</h3>
+                    <p>Urdu · Storytelling Edit</p>
                 </div>
-                <div class="stack__item">
-                    <div class="stack__icon"><i class="fas fa-magic"></i></div>
-                    <h3>After Effects</h3>
-                    <p>Motion Graphics & VFX</p>
-                </div>
-                <div class="stack__item">
-                    <div class="stack__icon"><i class="fas fa-palette"></i></div>
-                    <h3>DaVinci Resolve</h3>
-                    <p>Color Grading</p>
-                </div>
-                <div class="stack__item">
-                    <div class="stack__icon"><i class="fas fa-headphones"></i></div>
-                    <h3>Audition</h3>
-                    <p>Audio Post-Production</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============ PROJECT PLAYER ============ -->
-    <div class="project-player" id="projectPlayer">
-        <div class="project-player__backdrop" id="playerBackdrop"></div>
-        <div class="project-player__dialog">
-            <button class="project-player__close" id="playerClose" aria-label="Close">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="project-player__media" id="playerMedia"></div>
-            <div class="project-player__caption">
-                <h2 id="playerTitle"></h2>
-                <p id="projectPlayerMessage">Playing inside the portfolio.</p>
             </div>
         </div>
     </div>
+</section>
 
-    <!-- ============ CONTACT ============ -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-num">04</span>
-                <h2 class="section-title">Contact</h2>
+<!-- About -->
+<section class="about" id="about">
+    <div class="container">
+        <div class="section-head">
+            <div class="section-num">02</div>
+            <h2>About</h2>
+        </div>
+        <div class="about__grid">
+            <div class="about__text">
+                <p class="about__lead">I'm <strong>Hamas Ahmed</strong>, a creative video editor from Thatta, Pakistan. I craft cinematic edits that blend emotion with visual artistry.</p>
+                <p>Since 2023, I've been turning raw footage into stories — from emotional fan edits to cinematic music videos. Every frame matters, every cut has purpose.</p>
+                <p>I work with <strong>Premiere Pro</strong>, <strong>After Effects</strong>, <strong>DaVinci Resolve</strong>, and <strong>Audition</strong> to deliver polished, professional results.</p>
             </div>
-            <div class="contact__grid">
-                <div class="contact__item">
-                    <p class="contact__label">Email</p>
-                    <a href="mailto:hamasahmed155@gmail.com" class="contact__value">hamasahmed155@gmail.com</a>
-                </div>
-                <div class="contact__item">
-                    <p class="contact__label">Location</p>
-                    <p class="contact__value">Thatta, Pakistan</p>
-                </div>
-                <div class="contact__item">
-                    <p class="contact__label">WhatsApp</p>
-                    <a href="https://wa.me/923063632210" target="_blank" class="contact__value">+92 306 3632210</a>
-                </div>
-                <div class="contact__item">
-                    <p class="contact__label">Social</p>
-                    <div class="contact__socials">
-                        <a href="https://www.youtube.com/@xtremelyrics0" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="https://www.tiktok.com/@xtremelyrics" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://wa.me/9230630632210" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="contact__cta">
-                <a href="https://wa.me/923063632210" target="_blank" class="btn-cta btn-cta--lg">
-                    <span>Let's Talk</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+            <div class="about__stats">
+                <div class="stat"><div class="stat__num" data-count="3">0</div><div class="stat__label">Years Editing</div></div>
+                <div class="stat"><div class="stat__num" data-count="60">0</div><div class="stat__label">Videos Edited</div></div>
+                <div class="stat"><div class="stat__num" data-count="80">0</div><div class="stat__label">K+ Total Views</div></div>
+                <div class="stat"><div class="stat__num" data-count="4">0</div><div class="stat__label">Software Mastered</div></div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ============ FOOTER ============ -->
-    <footer class="footer">
-        <div class="container">
-            <p class="footer__text">Designed & Edited by <span>Hamas Ahmed</span></p>
-            <p class="footer__year">2026</p>
+<!-- Contact -->
+<section class="contact" id="contact">
+    <div class="container">
+        <div class="contact__inner">
+            <div class="section-head">
+                <div class="section-num">03</div>
+                <h2>Let's Create</h2>
+            </div>
+            <p class="contact__big">Got a project? <span>Let's make something memorable.</span></p>
+            <a href="mailto:hamasahmed155@gmail.com" class="contact__email">hamasahmed155@gmail.com</a>
+            <div class="contact__socials">
+                <a href="https://wa.me/923063632210" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.youtube.com/@xtremelyrics0" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@xtremelyrics" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="mailto:hamasahmed155@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="script.js?v=1786106785"></script>
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2026 Hamas Ahmed · Creative Video Editor · Thatta, Pakistan</p>
+</footer>
+
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal">
+    <div class="video-modal__bg" id="modalBg"></div>
+    <div class="video-modal__inner">
+        <button class="video-modal__close" id="modalClose"><i class="fas fa-times"></i></button>
+        <div class="video-modal__player" id="modalPlayer"></div>
+        <div class="video-modal__title" id="modalTitle"></div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js?v=1786107032"></script>
 </body>
 </html>
