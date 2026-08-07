@@ -9,8 +9,8 @@
     --bg: #050505;
     --surface: #0c0c0c;
     --text: #ffffff;
-    --text-dim: #6a6a6a;
-    --text-muted: #999999;
+    --text-dim: rgba(255, 255, 255, 0.4);
+    --text-muted: rgba(255, 255, 255, 0.55);
     --gold: #d4af37;
     --gold-glow: rgba(212, 175, 55, 0.15);
     --border: rgba(255, 255, 255, 0.08);
