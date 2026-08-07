@@ -77,6 +77,7 @@ window.addEventListener('scroll', () => {
 // ===== SCROLLTRIGGER ANIMATIONS =====
 if (window.gsap && window.ScrollTrigger) {
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
     
     // Track headers
     gsap.utils.toArray('.track-header').forEach(head => {
@@ -124,6 +125,25 @@ if (window.gsap && window.ScrollTrigger) {
         scrollTrigger: { trigger: '.footer', start: 'top 95%' }
     });
 }
+
+// Refresh ScrollTrigger once everything (images/fonts) has fully loaded —
+// prevents stuck/blank sections caused by layout shifts on slow connections
+window.addEventListener('load', () => {
+    if (window.ScrollTrigger) setTimeout(() => ScrollTrigger.refresh(), 200);
+});
+
+// Safety net: force-reveal any element that GSAP set to opacity:0 but never
+// animated in (e.g. slow network stalls the reveal). Runs a few seconds after
+// load so real timed animations aren't interrupted.
+setTimeout(() => {
+    document.querySelectorAll('.track-header, .clip, .stat, .gear-card, .about__left p, .contact__big, .contact__email, .contact__socials, .footer__left, .footer__right').forEach(el => {
+        const op = window.getComputedStyle(el).opacity;
+        if (parseFloat(op) < 0.5) {
+            if (window.gsap) gsap.to(el, { opacity: 1, y: 0, x: 0, duration: 0.5 });
+            else el.style.opacity = '1';
+        }
+    });
+}, 3500);
 
 // ===== COUNTER ANIMATION =====
 const counters = document.querySelectorAll('[data-count]');
