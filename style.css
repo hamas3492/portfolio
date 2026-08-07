@@ -60,7 +60,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: #f2f0f3;
+    background: #000000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -84,7 +84,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
     font-size: clamp(2rem, 8vw, 6rem);
     font-weight: 800;
     color: transparent;
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.08);
+    -webkit-text-stroke: 1px rgba(212, 175, 55, 0.12);
     letter-spacing: -0.02em;
     animation: scroll-text 20s linear infinite;
 }
@@ -103,7 +103,7 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
     padding: 16px 28px;
     background: var(--black);
     border-radius: 100px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    box-shadow: 0 20px 60px rgba(212,175,55,0.1);
     min-width: 280px;
 }
 
@@ -153,11 +153,11 @@ button { border: none; background: none; cursor: pointer; font-family: inherit; 
     font-family: var(--font-head);
     font-weight: 600;
     font-size: 1rem;
-    color: var(--black);
+    color: var(--text);
 }
 
 .loader__brand span {
-    color: #999;
+    color: var(--gold);
 }
 
 /* ============ 5. NAV ============ */
