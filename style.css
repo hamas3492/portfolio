@@ -28,7 +28,18 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 body {
-    background: var(--bg);
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(124,58,237,0.025) 0, rgba(124,58,237,0.025) 2px,
+            transparent 2px, transparent 42px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,0.012) 0, rgba(255,255,255,0.012) 1px,
+            transparent 1px, transparent 6px
+        ),
+        var(--bg);
     color: var(--text);
     font-family: var(--font-body);
     overflow-x: hidden;
