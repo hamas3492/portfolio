@@ -4,15 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <title>Hamas Ahmed — Creative Video Editor</title>
-    <meta name="description" content="Hamas Ahmed — Creative Video Editor from Thatta, Pakistan. Cinematic edits, emotional storytelling, visual artistry.">
+    <title>Hamas Ahmed — Creative Video Editor & Digital Creator</title>
+    <meta name="description" content="Hamas Ahmed is a creative video editor and digital creator from Thatta, Pakistan. Specializing in cinematic edits, storytelling, AI-powered content, and multimedia design.">
+    <meta name="keywords" content="Hamas Ahmed, video editor, creative editor, Thatta, Pakistan, cinematic editing, portfolio, AI tools, digital creator">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Hamas Ahmed — Creative Video Editor">
-    <meta property="og:description" content="Cinematic edits, emotional storytelling, visual artistry.">
+    <meta property="og:title" content="Hamas Ahmed — Creative Video Editor & Digital Creator">
+    <meta property="og:description" content="Cinematic edits, emotional storytelling, AI-powered content creation, and multimedia design.">
+    <meta property="og:image" content="https://hamas3492.github.io/portfolio/assets/hero.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hamas Ahmed — Creative Video Editor & Digital Creator">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0a14'/><text x='50' y='68' font-family='Arial' font-size='52' font-weight='bold' fill='%237c3aed' text-anchor='middle'>H</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=1786108571">
+    <link rel="stylesheet" href="style.css?v=1788423125">
+    <script type="application/ld+json">
+    {
+      "@type": "Person",
+      "name": "Hamas Ahmed",
+      "jobTitle": "Creative Video Editor & Digital Creator",
+      "address": "Thatta, Sindh, Pakistan",
+      "email": "hamasahmed155@gmail.com",
+      "sameAs": ["https://www.youtube.com/@xtremelyrics0","https://www.tiktok.com/@xtremelyrics"]
+    }
+    </script>
     <script>
     (function(){
         var l=document.querySelectorAll('link[rel="stylesheet"]');
@@ -22,178 +36,382 @@
 </head>
 <body>
 
-<!-- Aurora background -->
-<div class="aurora"><div class="aurora__layer aurora__layer--1"></div><div class="aurora__layer aurora__layer--2"></div><div class="aurora__layer aurora__layer--3"></div></div>
-<div class="dotgrid"></div>
-<div class="grain"></div>
+<!-- Noise overlay -->
+<div class="noise"></div>
+<!-- Custom cursor glow -->
+<div class="cursor-glow" id="cursorGlow"></div>
 
 <!-- Loader -->
-<div class="loader" id="loader"><div class="loader__spinner"></div><div class="loader__text">Hamas Ahmed</div></div>
+<div class="loader" id="loader">
+    <div class="loader__container">
+        <div class="loader__segments">
+            <div class="loader__seg"></div>
+            <div class="loader__seg"></div>
+            <div class="loader__seg"></div>
+            <div class="loader__seg"></div>
+        </div>
+        <div class="loader__text">Hamas Ahmed</div>
+        <div class="loader__sub">Creative Video Editor</div>
+    </div>
+</div>
+
+<!-- Progress bar -->
+<div class="progress-bar"><div class="progress-bar__fill" id="progressFill"></div></div>
 
 <!-- Nav -->
 <nav class="nav" id="nav">
-    <a href="#" class="nav__logo">
-        <img src="assets/logo.png" alt="Hamas Ahmed" class="nav__logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-        <span class="nav__logo-fallback">Hamas<span> Ahmed</span></span>
-    </a>
+    <a href="#hero" class="nav__logo">Hamas<span>.</span></a>
     <div class="nav__links">
         <a href="#work" data-nav>Work</a>
         <a href="#about" data-nav>About</a>
         <a href="#skills" data-nav>Skills</a>
+        <a href="#tools" data-nav>Tools</a>
         <a href="#contact" data-nav>Contact</a>
     </div>
-    <a href="#contact" class="nav__cta">Let's Talk</a>
-    <button class="nav__burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+    <a href="#contact" class="nav__cta">Let's Talk <i class="fas fa-arrow-up-right"></i></a>
+    <button class="nav__burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
-    <a href="#work" data-nav>Work</a>
-    <a href="#about" data-nav>About</a>
-    <a href="#skills" data-nav>Skills</a>
-    <a href="#contact" data-nav>Contact</a>
+    <div class="mobile-menu__links">
+        <a href="#work" data-nav>Work</a>
+        <a href="#about" data-nav>About</a>
+        <a href="#skills" data-nav>Skills</a>
+        <a href="#tools" data-nav>Tools</a>
+        <a href="#contact" data-nav>Contact</a>
+    </div>
 </div>
 
-<!-- Hero -->
+<!-- ===== HERO ===== -->
 <section class="hero" id="hero">
+    <div class="hero__bg"></div>
     <div class="hero__center">
-        <div class="hero__badge"><span class="dot"></span>Available for Work</div>
-        <h1 class="hero__title">
-            <span class="hero__word">CREATIVE</span>
-            <span class="hero__word accent">VIDEO</span>
-            <span class="hero__word">EDITOR</span>
+        <div class="hero__avail" data-anim>
+            <span class="hero__avail-dot"></span>
+            Available for freelance work
+        </div>
+        <h1 class="hero__title" data-anim>
+            <span class="hero__line">Creative</span>
+            <span class="hero__line hero__line--accent">Video Editor</span>
+            <span class="hero__line">& Digital Creator</span>
         </h1>
-        <p class="hero__sub">Cinematic edits · Emotional storytelling · Visual artistry<br>Based in Thatta, Pakistan — available worldwide</p>
-        <div class="hero__btns">
-            <a href="#work" class="btn btn-primary">View Work <i class="fas fa-arrow-right"></i></a>
-            <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+        <p class="hero__desc" data-anim>
+            I craft cinematic edits, emotional stories, and AI-powered content from Thatta, Pakistan. Every frame has purpose, every cut tells a story.
+        </p>
+        <div class="hero__actions" data-anim>
+            <a href="#work" class="btn btn-primary">
+                <span>View My Work</span>
+                <i class="fas fa-arrow-down"></i>
+            </a>
+            <a href="#contact" class="btn btn-ghost">
+                <span>Get in Touch</span>
+            </a>
         </div>
-        <div class="hero__stats">
-            <div class="hero__stat"><div class="hero__stat-num" data-count="3">0</div><div class="hero__stat-label">Years</div></div>
-            <div class="hero__stat-sep"></div>
-            <div class="hero__stat"><div class="hero__stat-num" data-count="60">0</div><div class="hero__stat-label">Edits</div></div>
-            <div class="hero__stat-sep"></div>
-            <div class="hero__stat"><div class="hero__stat-num" data-count="80">0</div><div class="hero__stat-label">K+ Views</div></div>
+        <div class="hero__meta" data-anim>
+            <div class="hero__meta-item">
+                <div class="hero__meta-num" data-count="3">0</div>
+                <div class="hero__meta-label">Years</div>
+            </div>
+            <div class="hero__meta-divider"></div>
+            <div class="hero__meta-item">
+                <div class="hero__meta-num" data-count="60">0</div>
+                <div class="hero__meta-label">Edits</div>
+            </div>
+            <div class="hero__meta-divider"></div>
+            <div class="hero__meta-item">
+                <div class="hero__meta-num" data-count="80">0</div>
+                <div class="hero__meta-label">K+ Views</div>
+            </div>
+            <div class="hero__meta-divider"></div>
+            <div class="hero__meta-item">
+                <div class="hero__meta-num" data-count="15">0</div>
+                <div class="hero__meta-label">Tools</div>
+            </div>
         </div>
+    </div>
+    <div class="hero__scroll" data-anim>
+        <span>Scroll</span>
+        <div class="hero__scroll-line"></div>
     </div>
 </section>
 
-<!-- Work -->
+<!-- Marquee -->
+<div class="marquee" data-anim>
+    <div class="marquee__track">
+        <span>Cinematic Editing</span><i class="fas fa-star"></i>
+        <span>AI-Powered Content</span><i class="fas fa-star"></i>
+        <span>Storytelling</span><i class="fas fa-star"></i>
+        <span>Color Grading</span><i class="fas fa-star"></i>
+        <span>Sound Design</span><i class="fas fa-star"></i>
+        <span>Multimedia Design</span><i class="fas fa-star"></i>
+        <span>Cinematic Editing</span><i class="fas fa-star"></i>
+        <span>AI-Powered Content</span><i class="fas fa-star"></i>
+        <span>Storytelling</span><i class="fas fa-star"></i>
+        <span>Color Grading</span><i class="fas fa-star"></i>
+        <span>Sound Design</span><i class="fas fa-star"></i>
+        <span>Multimedia Design</span><i class="fas fa-star"></i>
+    </div>
+</div>
+
+<!-- ===== WORK ===== -->
 <section class="work" id="work">
     <div class="container">
-        <div class="section-head">
-            <div class="section-head__num">01</div>
-            <h2>Selected Work</h2>
-            <div class="section-head__line"></div>
+        <div class="section-head" data-anim>
+            <div class="section-head__left">
+                <div class="section-head__num">01</div>
+                <h2 class="section-head__title">Selected <em>Work</em></h2>
+            </div>
+            <p class="section-head__desc">A selection of cinematic edits, each crafted with intention and emotion.</p>
         </div>
-        <div class="glass-grid">
-            <div class="glass-card" data-project-video="7596779781211884807" data-project-title="Arz Kiya Hai — Max & Lucas Edit">
-                <div class="glass-card__inner">
-                    <div class="glass-card__thumb"><img src="assets/project-thumbs/arz-kiya-hai.jpg" alt="Arz Kiya Hai" loading="lazy"></div>
-                    <div class="glass-card__body">
-                        <div class="glass-card__num">01</div>
-                        <h3>Arz Kiya Hai</h3>
-                        <p>Max & Lucas · Stranger Things emotional edit</p>
-                        <div class="glass-card__tags"><span>Cinematic</span><span>Fan Edit</span></div>
-                        <div class="glass-card__play"><i class="fas fa-play"></i> Watch</div>
-                    </div>
+
+        <div class="work__list">
+            <div class="work-item" data-project-video="7596779781211884807" data-project-title="Arz Kiya Hai — Max & Lucas Edit" data-anim>
+                <div class="work-item__num">01</div>
+                <div class="work-item__thumb">
+                    <img src="assets/project-thumbs/arz-kiya-hai.jpg" alt="Arz Kiya Hai" loading="lazy">
+                    <div class="work-item__play"><i class="fas fa-play"></i></div>
                 </div>
+                <div class="work-item__info">
+                    <h3>Arz Kiya Hai</h3>
+                    <p>Max & Lucas · Stranger Things emotional fan edit. 79.4K views on TikTok.</p>
+                </div>
+                <div class="work-item__tags"><span>Cinematic</span><span>Fan Edit</span></div>
+                <div class="work-item__arrow"><i class="fas fa-arrow-up-right"></i></div>
             </div>
-            <div class="glass-card" data-project-video="7554273306086558983" data-project-title="Extraordinary Child — Emotional Edit">
-                <div class="glass-card__inner">
-                    <div class="glass-card__thumb"><img src="assets/project-thumbs/extraordinary-child.jpg" alt="Extraordinary Child" loading="lazy"></div>
-                    <div class="glass-card__body">
-                        <div class="glass-card__num">02</div>
-                        <h3>Extraordinary Child</h3>
-                        <p>Emotional cinematic edit — innocence & wonder</p>
-                        <div class="glass-card__tags"><span>Storytelling</span><span>Color Grade</span></div>
-                        <div class="glass-card__play"><i class="fas fa-play"></i> Watch</div>
-                    </div>
+
+            <div class="work-item" data-project-video="7554273306086558983" data-project-title="Extraordinary Child — Emotional Edit" data-anim>
+                <div class="work-item__num">02</div>
+                <div class="work-item__thumb">
+                    <img src="assets/project-thumbs/extraordinary-child.jpg" alt="Extraordinary Child" loading="lazy">
+                    <div class="work-item__play"><i class="fas fa-play"></i></div>
                 </div>
+                <div class="work-item__info">
+                    <h3>Extraordinary Child</h3>
+                    <p>Emotional cinematic edit exploring themes of innocence and wonder.</p>
+                </div>
+                <div class="work-item__tags"><span>Storytelling</span><span>Color Grade</span></div>
+                <div class="work-item__arrow"><i class="fas fa-arrow-up-right"></i></div>
             </div>
-            <div class="glass-card" data-project-video="7664542258032626964" data-project-title="Tum Kya Gaye — Urdu Edit">
-                <div class="glass-card__inner">
-                    <div class="glass-card__thumb"><img src="assets/project-thumbs/urdu-edit.jpg" alt="Tum Kya Gaye" loading="lazy"></div>
-                    <div class="glass-card__body">
-                        <div class="glass-card__num">03</div>
-                        <h3>Tum Kya Gaye</h3>
-                        <p>Urdu storytelling with poetic pacing & sound design</p>
-                        <div class="glass-card__tags"><span>Urdu</span><span>Sound Design</span></div>
-                        <div class="glass-card__play"><i class="fas fa-play"></i> Watch</div>
-                    </div>
+
+            <div class="work-item" data-project-video="7664542258032626964" data-project-title="Tum Kya Gaye — Urdu Edit" data-anim>
+                <div class="work-item__num">03</div>
+                <div class="work-item__thumb">
+                    <img src="assets/project-thumbs/urdu-edit.jpg" alt="Tum Kya Gaye" loading="lazy">
+                    <div class="work-item__play"><i class="fas fa-play"></i></div>
                 </div>
+                <div class="work-item__info">
+                    <h3>Tum Kya Gaye</h3>
+                    <p>Urdu storytelling edit with poetic pacing and layered sound design.</p>
+                </div>
+                <div class="work-item__tags"><span>Urdu</span><span>Sound Design</span></div>
+                <div class="work-item__arrow"><i class="fas fa-arrow-up-right"></i></div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- About -->
+<!-- ===== ABOUT ===== -->
 <section class="about" id="about">
     <div class="container">
-        <div class="section-head">
-            <div class="section-head__num">02</div>
-            <h2>About</h2>
-            <div class="section-head__line"></div>
-        </div>
         <div class="about__grid">
-            <div class="about__big">
-                <p class="about__lead">I'm <strong>Hamas Ahmed</strong>, a creative video editor from <em>Thatta, Pakistan</em>. Since 2023, I've been turning raw footage into stories that make people <em>feel</em>.</p>
-                <p class="about__body">Every frame matters, every cut has purpose. I don't just assemble clips — I craft rhythm, pacing, and emotion. From cinematic fan edits to poetic Urdu storytelling, each project gets my full creative attention.</p>
-                <div class="about__chips">
-                    <div class="chip"><i class="fas fa-video"></i> Premiere Pro</div>
-                    <div class="chip"><i class="fas fa-magic"></i> After Effects</div>
-                    <div class="chip"><i class="fas fa-palette"></i> DaVinci Resolve</div>
-                    <div class="chip"><i class="fas fa-volume-high"></i> Audition</div>
+            <div class="about__left" data-anim>
+                <div class="section-head__num section-head__num--inline">02</div>
+                <h2 class="about__title">About <em>Me</em></h2>
+                <p class="about__lead">
+                    I'm <strong>Hamas Ahmed</strong>, a creative video editor and digital creator from <strong>Thatta, Pakistan</strong>. Since 2023, I've been transforming raw footage into stories that make people feel something.
+                </p>
+                <p class="about__body">
+                    My approach is simple — every frame matters, every cut has purpose. I don't just assemble clips; I craft rhythm, pacing, and emotion. From cinematic fan edits to poetic Urdu storytelling, each project gets my full creative attention.
+                </p>
+                <p class="about__body">
+                    Beyond editing, I work with AI tools, design software, and multimedia platforms to deliver complete creative solutions. I'm always learning, always building, always pushing limits.
+                </p>
+            </div>
+            <div class="about__right" data-anim>
+                <div class="about-card">
+                    <div class="about-card__icon"><i class="fas fa-map-pin"></i></div>
+                    <div class="about-card__label">Location</div>
+                    <div class="about-card__value">Thatta, Pakistan</div>
+                </div>
+                <div class="about-card">
+                    <div class="about-card__icon"><i class="fas fa-briefcase"></i></div>
+                    <div class="about-card__label">Experience</div>
+                    <div class="about-card__value">3+ Years</div>
+                </div>
+                <div class="about-card">
+                    <div class="about-card__icon"><i class="fas fa-rocket"></i></div>
+                    <div class="about-card__label">Focus</div>
+                    <div class="about-card__value">Cinematic & AI Content</div>
+                </div>
+                <div class="about-card">
+                    <div class="about-card__icon"><i class="fas fa-globe"></i></div>
+                    <div class="about-card__label">Availability</div>
+                    <div class="about-card__value">Worldwide · Remote</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Skills -->
+<!-- ===== SKILLS ===== -->
 <section class="skills" id="skills">
     <div class="container">
-        <div class="section-head">
-            <div class="section-head__num">03</div>
-            <h2>Skills</h2>
-            <div class="section-head__line"></div>
+        <div class="section-head" data-anim>
+            <div class="section-head__left">
+                <div class="section-head__num">03</div>
+                <h2 class="section-head__title">Skills & <em>Expertise</em></h2>
+            </div>
+            <p class="section-head__desc">A comprehensive toolkit spanning video editing, AI content creation, and multimedia design.</p>
         </div>
+
         <div class="skills__grid">
-            <div class="skill-bar"><div class="skill-bar__head"><span>Premiere Pro</span><span>95%</span></div><div class="skill-bar__track"><div class="skill-bar__fill" data-w="95"></div></div></div>
-            <div class="skill-bar"><div class="skill-bar__head"><span>After Effects</span><span>85%</span></div><div class="skill-bar__track"><div class="skill-bar__fill" data-w="85"></div></div></div>
-            <div class="skill-bar"><div class="skill-bar__head"><span>DaVinci Resolve</span><span>80%</span></div><div class="skill-bar__track"><div class="skill-bar__fill" data-w="80"></div></div></div>
-            <div class="skill-bar"><div class="skill-bar__head"><span>Audition</span><span>75%</span></div><div class="skill-bar__track"><div class="skill-bar__fill" data-w="75"></div></div></div>
-            <div class="skill-bar"><div class="skill-bar__head"><span>Cinematic Pacing</span><span>90%</span></div><div class="skill-bar__track"><div class="skill-bar__fill" data-w="90"></div></div></div>
-            <div class="skill-bar"><div class="skill-bar__head"><span>Sound Design</span><span>78%</span></div><div class="skill-bar__track"><div class="skill-bar__fill" data-w="78"></div></div></div>
+            <!-- Video Editing -->
+            <div class="skill-card" data-anim>
+                <div class="skill-card__icon"><i class="fas fa-film"></i></div>
+                <h3>Video Editing</h3>
+                <div class="skill-card__items">
+                    <div class="skill-item"><span>Cinematic Pacing</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="92"></div></div></div>
+                    <div class="skill-item"><span>Color Grading</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="85"></div></div></div>
+                    <div class="skill-item"><span>Sound Design</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="80"></div></div></div>
+                    <div class="skill-item"><span>Music Sync</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="90"></div></div></div>
+                </div>
+            </div>
+
+            <!-- AI Tools -->
+            <div class="skill-card" data-anim>
+                <div class="skill-card__icon"><i class="fas fa-robot"></i></div>
+                <h3>AI Tools & Prompting</h3>
+                <div class="skill-card__items">
+                    <div class="skill-item"><span>ChatGPT / GPT-4</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="88"></div></div></div>
+                    <div class="skill-item"><span>Midjourney / DALL-E</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="82"></div></div></div>
+                    <div class="skill-item"><span>AI Video Generation</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="78"></div></div></div>
+                    <div class="skill-item"><span>Prompt Engineering</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="85"></div></div></div>
+                </div>
+            </div>
+
+            <!-- Design & Multimedia -->
+            <div class="skill-card" data-anim>
+                <div class="skill-card__icon"><i class="fas fa-palette"></i></div>
+                <h3>Design & Multimedia</h3>
+                <div class="skill-card__items">
+                    <div class="skill-item"><span>Visual Storytelling</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="90"></div></div></div>
+                    <div class="skill-item"><span>Thumbnail Design</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="82"></div></div></div>
+                    <div class="skill-item"><span>Photo Editing</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="80"></div></div></div>
+                    <div class="skill-item"><span>Typography</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="78"></div></div></div>
+                </div>
+            </div>
+
+            <!-- Office & Productivity -->
+            <div class="skill-card" data-anim>
+                <div class="skill-card__icon"><i class="fas fa-file-lines"></i></div>
+                <h3>Office & Productivity</h3>
+                <div class="skill-card__items">
+                    <div class="skill-item"><span>MS Word</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="95"></div></div></div>
+                    <div class="skill-item"><span>MS PowerPoint</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="90"></div></div></div>
+                    <div class="skill-item"><span>MS Excel</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="82"></div></div></div>
+                    <div class="skill-item"><span>Google Workspace</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="88"></div></div></div>
+                </div>
+            </div>
+
+            <!-- Content Creation -->
+            <div class="skill-card" data-anim>
+                <div class="skill-card__icon"><i class="fas fa-create"></i></div>
+                <h3>Content Creation</h3>
+                <div class="skill-card__items">
+                    <div class="skill-item"><span>Scriptwriting</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="80"></div></div></div>
+                    <div class="skill-item"><span>Social Media Content</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="88"></div></div></div>
+                    <div class="skill-item"><span>YouTube Production</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="85"></div></div></div>
+                    <div class="skill-item"><span>Short-Form Video</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="92"></div></div></div>
+                </div>
+            </div>
+
+            <!-- Technical -->
+            <div class="skill-card" data-anim>
+                <div class="skill-card__icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Technical Skills</h3>
+                <div class="skill-card__items">
+                    <div class="skill-item"><span>HTML & CSS</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="75"></div></div></div>
+                    <div class="skill-item"><span>File Management</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="85"></div></div></div>
+                    <div class="skill-item"><span>Cloud Storage</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="82"></div></div></div>
+                    <div class="skill-item"><span>Research & Learning</span><div class="skill-item__bar"><div class="skill-item__fill" data-w="95"></div></div></div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Contact -->
+<!-- ===== TOOLS ===== -->
+<section class="tools" id="tools">
+    <div class="container">
+        <div class="section-head" data-anim>
+            <div class="section-head__left">
+                <div class="section-head__num">04</div>
+                <h2 class="section-head__title">My <em>Arsenal</em></h2>
+            </div>
+            <p class="section-head__desc">Every tool I use to bring creative visions to life.</p>
+        </div>
+
+        <div class="tools__grid">
+            <div class="tool-chip" data-anim><i class="fas fa-video"></i><span>Premiere Pro</span></div>
+            <div class="tool-chip" data-anim><i class="fas fa-magic"></i><span>After Effects</span></div>
+            <div class="tool-chip" data-anim><i class="fas fa-palette"></i><span>DaVinci Resolve</span></div>
+            <div class="tool-chip" data-anim><i class="fas fa-volume-high"></i><span>Audition</span></div>
+            <div class="tool-chip" data-anim><i class="fas fa-robot"></i><span>ChatGPT</span></div>
+            <div class="tool-chip" data-anim><i class="fas fa-image"></i><span>Midjourney</span></div>
+            <div class="tool-chip" data-anim><i class="fas fa-wand-magic-sparkles"></i><span>DALL-E</span></div>
+            <div class="tool-chip" data-anim><i class="fas fa-scissors"></i><span>CapCut</span></div>
+            <div class="tool-chip" data-anim><i class="fas fa-file-word"></i><span>MS Word</span></div>
+            <div class="tool-chip" data-anim><i class="fas fa-file-powerpoint"></i><span>PowerPoint</span></div>
+            <div class="tool-chip" data-anim><i class="fas fa-file-excel"></i><span>MS Excel</span></div>
+            <div class="tool-chip" data-anim><i class="fab fa-google-drive"></i><span>Google Drive</span></div>
+            <div class="tool-chip" data-anim><i class="fas fa-photo-film"></i><span>Photoshop</span></div>
+            <div class="tool-chip" data-anim><i class="fab fa-instagram"></i><span>Instagram</span></div>
+            <div class="tool-chip" data-anim><i class="fab fa-tiktok"></i><span>TikTok Studio</span></div>
+            <div class="tool-chip" data-anim><i class="fab fa-youtube"></i><span>YouTube Studio</span></div>
+            <div class="tool-chip" data-anim><i class="fas fa-cloud"></i><span>CloudWorkflow</span></div>
+            <div class="tool-chip" data-anim><i class="fas fa-bolt"></i><span>RunwayML</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
 <section class="contact" id="contact">
     <div class="container">
-        <div class="section-head">
-            <div class="section-head__num">04</div>
-            <h2>Contact</h2>
-            <div class="section-head__line"></div>
-        </div>
-        <div class="contact__inner">
-            <p class="contact__big">Got a story to tell?</p>
-            <p class="contact__big2">Let's make it <span>unforgettable.</span></p>
-            <a href="mailto:hamasahmed155@gmail.com" class="contact__email"><i class="fas fa-envelope"></i> hamasahmed155@gmail.com</a>
+        <div class="contact__inner" data-anim>
+            <div class="section-head__num section-head__num--inline">05</div>
+            <h2 class="contact__title">Let's Create Something <em>Unforgettable</em></h2>
+            <p class="contact__desc">Have a project in mind? Let's talk. I'm available for freelance work, collaborations, and creative partnerships worldwide.</p>
+            <a href="mailto:hamasahmed155@gmail.com" class="contact__email">
+                <i class="fas fa-envelope"></i>
+                <span>hamasahmed155@gmail.com</span>
+                <i class="fas fa-arrow-up-right"></i>
+            </a>
             <div class="contact__socials">
-                <a href="https://wa.me/923063632210" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.youtube.com/@xtremelyrics0" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.tiktok.com/@xtremelyrics" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="mailto:hamasahmed155@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://wa.me/923063632210" target="_blank" aria-label="WhatsApp" class="social-link">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="https://www.youtube.com/@xtremelyrics0" target="_blank" aria-label="YouTube" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+                <a href="https://www.tiktok.com/@xtremelyrics" target="_blank" aria-label="TikTok" class="social-link">
+                    <i class="fab fa-tiktok"></i>
+                    <span>TikTok</span>
+                </a>
+                <a href="mailto:hamasahmed155@gmail.com" aria-label="Email" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                </a>
             </div>
         </div>
     </div>
 </section>
 
 <footer class="footer">
-    <div>© 2026 Hamas Ahmed · Creative Video Editor</div>
-    <div>Thatta, Pakistan</div>
+    <div class="footer__left">© 2026 Hamas Ahmed</div>
+    <div class="footer__right">Creative Video Editor · Thatta, Pakistan</div>
 </footer>
 
 <!-- Video Modal -->
@@ -206,8 +424,10 @@
     </div>
 </div>
 
+<!-- Lenis smooth scroll -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="script.js?v=1786108571"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.0.42/lenis.min.js"></script>
+<script src="script.js?v=1788423125"></script>
 </body>
 </html>
