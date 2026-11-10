@@ -258,3 +258,12 @@ section{padding:120px 0;}
     .contact__socials{flex-direction:column;align-items:center;}
     .social-link{min-width:160px;justify-content:center;}
 }
+/* ===== CHANNEL CARDS (CV upgrade) ===== */
+a.skill-card{display:block;text-decoration:none;color:inherit;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}
+a.skill-card:hover{transform:translateY(-6px);border-color:rgba(124,58,237,.55);box-shadow:0 18px 45px -18px rgba(124,58,237,.55)}
+a.skill-card:hover .skill-card__icon{color:#c4b5fd}
+.journey .skill-card p,.channels .skill-card p{line-height:1.65}
+@media (max-width:520px){
+  .skills__grid{grid-template-columns:1fr!important}
+  .hero__meta{flex-wrap:wrap;gap:.75rem;justify-content:center}
+}
